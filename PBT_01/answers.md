@@ -222,7 +222,6 @@ Danh sách 11 lỗi (Syntax và Semantic) được tìm thấy:
 - **Table đó hiển thị nội dung gì?** Em đã kiểm tra phần "Cấu hình điện thoại" (hoặc Thông số kỹ thuật) - nơi đúng ra phải sử dụng cấu trúc bảng.
 - **Có dùng `<thead>`, `<tbody>` không?** - **KHÔNG.** Thực tế là trang web này **không hề sử dụng thẻ `<table>`** nào cho phần dữ liệu dạng bảng (Tabular data) của họ. 
   - Thay vào đó, họ lạm dụng các thẻ `<ul>, <li>` hoặc các thẻ `<div>` (ví dụ: `<div class="parameter">` hoặc `<ul class="parameter">`) kết hợp với CSS để dàn trang trông giống như một cái bảng.
-  - **Đánh giá Semantic:** Đây chính là lỗi **"Div Soup" (Anti-pattern)** điển hình được nhắc đến trong lý thuyết. Việc không dùng thẻ `<table>` cho dữ liệu bảng khiến cấu trúc mất đi ý nghĩa (Semantic)
 
 
 ### 3. Phân tích thẻ `<form>`
@@ -235,7 +234,7 @@ Danh sách 11 lỗi (Syntax và Semantic) được tìm thấy:
   - **`method`**: Sử dụng method `GET`. (Vì thao tác tìm kiếm chỉ là lấy dữ liệu từ Server về để xem, từ khóa sẽ được đẩy lên thẳng thanh URL, ví dụ: `?key=iphone`).
 - **Input types được dùng:**
   - **`<input type="text">`**: Đây là ô nhập liệu chính để người dùng gõ từ khóa tìm kiếm (Placeholder: "Bạn tìm gì...").
-
+  
   ---
 
 ## Bài C1 — Thiết kế cấu trúc
