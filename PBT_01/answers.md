@@ -219,7 +219,7 @@ Danh sách 11 lỗi (Syntax và Semantic) được tìm thấy:
 ### 2. Phân tích thẻ `<table>` (Sự vắng mặt của thẻ Table)
 *(Ảnh chụp tab Elements trên trang chủ Thế Giới Di Động)*
 ![thẻ table HTML](screenshots/b4_table.png)
-- **Table đó hiển thị nội dung gì?** Em đã kiểm tra phần "Cấu hình điện thoại" (hoặc Thông số kỹ thuật) - nơi đúng ra phải sử dụng cấu trúc bảng.
+- **Table đó hiển thị nội dung gì?** Em đã kiểm tra phần "Cấu hình điện thoại" (hoặc Thông số kỹ thuật) - nơi đúng ra phải sử dụng thẻ bảng nhưng không có
 - **Có dùng `<thead>`, `<tbody>` không?** - **KHÔNG.** Thực tế là trang web này **không hề sử dụng thẻ `<table>`** nào cho phần dữ liệu dạng bảng (Tabular data) của họ. 
   - Thay vào đó, họ lạm dụng các thẻ `<ul>, <li>` hoặc các thẻ `<div>` (ví dụ: `<div class="parameter">` hoặc `<ul class="parameter">`) kết hợp với CSS để dàn trang trông giống như một cái bảng.
 
