@@ -115,3 +115,60 @@
 - **2 Ví dụ thực tế:**
   1. Một biểu đồ/đồ thị thống kê trong bài báo cáo, bên dưới có dòng chú thích giải thích ý nghĩa số liệu (Ví dụ: *Biểu đồ 1: Doanh thu bán hàng Quý 1 năm 2026*).
   2. Một bức ảnh về tác phẩm nghệ thuật trong bài viết, bên dưới (figcaption) ghi tên tác phẩm, năm sáng tác và tên tác giả. (Hoặc dùng để bọc một khối hiển thị sản phẩm như ở ví dụ đề bài: gồm ảnh sản phẩm, tên và mức giá đi kèm).
+
+---
+
+# PHẦN C — PHÂN TÍCH & SUY LUẬN
+
+## Câu C1 (10đ) — Debug Form
+
+**Lỗi 1: Dòng 1** — Thẻ `<form>` thiếu các thuộc tính bắt buộc là `action` (nơi gửi dữ liệu) và `method` (phương thức gửi).
+**Sửa:** `<form action="/submit-url" method="POST">`
+
+**Lỗi 2: Dòng 2** — Input "Tên" không có `<label for="...">` (vi phạm Accessibility), thiếu thuộc tính `name` để gửi dữ liệu và thiếu `required` (không có Validation).
+**Sửa:** `<label for="name">Tên:</label> <input type="text" id="name" name="name" required>`
+
+**Lỗi 3: Dòng 4** — Input "Email" lạm dụng `placeholder` thay cho thẻ `<label>`. Điều này rất tệ cho Accessibility vì khi người dùng gõ chữ, placeholder sẽ biến mất khiến họ quên mất ô này dùng để làm gì. Cũng thiếu `name`, `id` và `required`.
+**Sửa:** `<label for="email">Email:</label> <input type="email" id="email" name="email" placeholder="Email của bạn" required>`
+
+**Lỗi 4: Dòng 6, 7** — Hai ô "Mật khẩu" không có `<label>` đi kèm, không có thuộc tính `name` để Server phân biệt đâu là mật khẩu chính/phụ, và thiếu Validation độ dài tối thiểu (`minlength`).
+**Sửa:** 
+`<label for="pwd">Mật khẩu:</label> <input type="password" id="pwd" name="pwd" placeholder="Mật khẩu" required minlength="8">`
+`<label for="pwd-confirm">Nhập lại mật khẩu:</label> <input type="password" id="pwd-confirm" name="pwd-confirm" placeholder="Nhập lại mật khẩu" required>`
+
+**Lỗi 5: Dòng 9** — Input "Phone" dùng sai semantic `type="text"`. Đáng lẽ phải dùng `type="tel"` để các thiết bị di động tự động hiển thị bàn phím số. Đồng thời thiếu `<label>`, `name` và `id`.
+**Sửa:** `<label for="phone">Phone:</label> <input type="tel" id="phone" name="phone" value="0901234567" required>`
+
+**Lỗi 6: Dòng 11** — Thẻ `<select>` không có `<label>` gắn kèm để giải thích ý nghĩa, không có thuộc tính `name` và `id` (nếu không có `name`, người dùng chọn xong bấm Submit Server cũng không nhận được dữ liệu thành phố).
+**Sửa:** `<label for="city">Tỉnh/Thành phố:</label> <select id="city" name="city">`
+
+**Lỗi 7: Dòng 12, 13** — Các thẻ `<option>` bên trong select bị thiếu thuộc tính `value`. Dữ liệu gửi đi cần được chuẩn hóa (ví dụ: `hn`) chứ không nên gửi nguyên chữ tiếng Việt có dấu (`Hà Nội`).
+**Sửa:** 
+`<option value="hanoi">Hà Nội</option>`
+`<option value="hcm">TP.HCM</option>`
+
+**Lỗi 8: Dòng 16, 17, 18** — Lỗi Logic và Accessibility nghiêm trọng. Có thẻ `<label>` nhưng lại hoàn toàn THIẾU mất ô checkbox (`<input type="checkbox">`), và label không có thuộc tính `for` để liên kết.
+**Sửa:** 
+`<input type="checkbox" id="terms" name="terms" required>`
+`<label for="terms">Tôi đồng ý điều khoản</label>`
+
+---
+
+## Câu C2 (10đ) — Thiết kế chiến lược Validation
+
+**1. Viết pattern (Regex) cho CMND/CCCD và Số tài khoản:**
+- **CMND/CCCD (Đúng 12 chữ số):** `pattern="[0-9]{12}"` (hoặc `^\d{12}$`)
+- **Số tài khoản (10-15 chữ số):** `pattern="[0-9]{10,15}"` (hoặc `^\d{10,15}$`)
+
+**2. HTML5 validation đủ an toàn cho ứng dụng ngân hàng chưa? Tại sao?**
+- **Trả lời:** TUYỆT ĐỐI KHÔNG đủ an toàn.
+- **Tại sao:** HTML5 Validation chỉ là kiểm tra ở lớp giao diện (Client-side), mục đích chính là mang lại trải nghiệm tốt cho người dùng (UX) bằng cách báo lỗi sớm để họ sửa. Bất kỳ ai có chút kiến thức IT đều có thể dễ dàng ấn F12 (DevTools), xóa các thuộc tính `required`, `pattern`, `maxlength` đi, hoặc sử dụng các công cụ như Postman để gửi thẳng dữ liệu độc hại qua mặt trình duyệt tới máy chủ. 
+
+**3. Liệt kê 3 loại validation mà HTML5 KHÔNG THỂ làm được (Phải dùng JavaScript):**
+1. **Validation chéo (Cross-field Validation):** HTML5 không thể so sánh giá trị giữa 2 ô input với nhau. Ví dụ: Không thể kiểm tra ô "Nhập lại mật khẩu" có khớp chính xác với ô "Mật khẩu" vừa nhập hay không.
+2. **Kiểm tra tính hợp lệ về mặt logic/nghiệp vụ:** HTML5 có thể chặn người dùng nhập ngày sinh ở tương lai, nhưng không thể tự tính toán xem người đó đã đủ 18 tuổi để mở thẻ ngân hàng hay chưa.
+3. **Validation bất đồng bộ (Asynchronous Validation):** HTML5 không thể tự động kiểm tra xem Email, Số điện thoại hay Số CCCD này đã tồn tại trong cơ sở dữ liệu của ngân hàng hay chưa trước khi người dùng bấm Submit.
+
+**4. Nêu 2 rủi ro bảo mật nếu chỉ validate trên Frontend mà không validate Backend:**
+1. **Lỗ hổng Injection (SQL Injection / XSS):** Kẻ gian bypass frontend và gửi các đoạn mã độc SQL hoặc JavaScript trực tiếp lên server. Nếu Backend tin tưởng tuyệt đối dữ liệu này và lưu thẳng vào Database, toàn bộ hệ thống có thể bị đánh sập hoặc thông tin thẻ của người dùng khác sẽ bị đánh cắp.
+2. **Thao túng nghiệp vụ tài chính:** Kẻ xấu có thể can thiệp vào Request để thay đổi số tiền chuyển khoản thành số âm (ví dụ: chuyển `-10.000.000đ`), hoặc sửa số tài khoản người nhận. Nếu Backend không validate lại logic, hệ thống sẽ thực hiện giao dịch sai lệch gây thiệt hại tài sản nghiêm trọng. Nguyên tắc vàng là: **"Không bao giờ tin tưởng dữ liệu gửi lên từ Client"**.
