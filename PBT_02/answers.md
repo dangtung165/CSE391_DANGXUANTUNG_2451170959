@@ -42,4 +42,9 @@
 *(Ghi chú: Em đã tạo file `validation_test.html` để chạy thử nghiệm các trường hợp trên. Kết quả thực tế khi bấm Submit hoàn toàn trùng khớp với các dự đoán lý thuyết ở phần 1. Thông báo lỗi sẽ bật ra ngay tại ô input đầu tiên bị lỗi).*
 
 **Screenshot kết quả validation thực tế:**
-![Kết quả Validation thực tế](./screenshots/a2_validation.png)
+![Kết quả Validation thực tế](./screenshots/A2_validation.png)
+![Kết quả Validation thực tế](./screenshots/A2_validation1.png)
+![Kết quả Validation thực tế](./screenshots/A2_validation2.png)
+![Kết quả Validation thực tế](./screenshots/A2_validation3.png)
+![Kết quả Validation thực tế](./screenshots/A2_validation4.png)
+![Kết quả Validation thực tế](./screenshots/A2_validation5.png)
