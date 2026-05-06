@@ -48,4 +48,36 @@
 *   **Giải thích:** Trong CSS có một quy tắc gọi là **Tính đặc thù (CSS Specificity) / Độ ưu tiên**. Trình duyệt sẽ tính điểm ưu tiên để quyết định style nào được áp dụng. 
     *   Inline CSS (thuộc tính `style="..."`) có điểm đặc thù cao nhất (1000 điểm).
     *   Internal và External CSS sử dụng các selector (id, class, thẻ) có điểm thấp hơn. 
-    *   *(Lưu ý: Giữa Internal và External, cái nào được khai báo sau cùng trong thẻ `<head>` thì cái đó sẽ thắng, nhưng cả hai đều sẽ bị Inline CSS ghi đè).*
+    *   *(Lưu ý: Giữa Internal và External, cái nào được khai báo sau cùng trong thẻ `<head>` thì cái đó sẽ thắng, nhưng cả hai đều sẽ bị Inline CSS ghi đè).
+
+---
+
+## Câu A2 (8đ) — CSS Selectors — Dự đoán kết quả
+
+**1. Dự đoán kết quả Selectors:**
+
+1. `h1` 
+   → Chọn: Thẻ `<h1>` có nội dung chữ là **"ShopTLU"**.
+2. `.price` 
+   → Chọn: Tất cả các thẻ có class là `price` (2 thẻ). Nội dung chữ là **"25.990.000đ"** và **"45.990.000đ"**.
+3. `#app header` 
+   → Chọn: Toàn bộ thẻ `<header>` nằm trong `#app`. Nội dung bao gồm chữ **"ShopTLU"** và các link điều hướng **"Home", "Products", "About"**.
+4. `nav a:first-child` 
+   → Chọn: Thẻ `<a>` đầu tiên nằm trực tiếp trong thẻ `<nav>`. Nội dung chữ là **"Home"**.
+5. `.product.featured h2` 
+   → Chọn: Thẻ `<h2>` nằm trong phần tử có ĐỒNG THỜI 2 class là `product` và `featured`. Nội dung chữ là **"MacBook Pro"**.
+6. `article > p` 
+   → Chọn: Tất cả các thẻ `<p>` là CON TRỰC TIẾP của thẻ `<article>` (gồm 4 thẻ). Nội dung chữ là: **"25.990.000đ"**, **"Mô tả sản phẩm..."** (của iPhone 16) và **"45.990.000đ"**, **"Mô tả sản phẩm..."** (của MacBook Pro).
+7. `a[href="/"]` 
+   → Chọn: Thẻ `<a>` có chính xác thuộc tính `href="/"`. Nội dung chữ là **"Home"**.
+8. `.top-bar.dark h1` 
+   → Chọn: Thẻ `<h1>` nằm trong phần tử có đồng thời 2 class `top-bar` và `dark`. Nội dung chữ là **"ShopTLU"**.
+
+---
+
+**2. File kiểm thử `selectors_test.html`**
+
+*(Ghi chú: Em đã tạo file `selectors_test.html` và thêm CSS với các màu sắc/viền khác nhau để highlight chính xác các phần tử được chọn như dự đoán ở trên).*
+
+**Screenshot kiểm chứng:**
+![Kết quả Selectors thực tế](./screenshots/A2_selectors.png)
