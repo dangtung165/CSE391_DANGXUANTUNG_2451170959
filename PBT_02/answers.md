@@ -43,7 +43,6 @@
 
 **Screenshot kết quả validation thực tế:**
 ![Kết quả Validation thực tế](./screenshots/A2_validation.png)
-![Kết quả Validation thực tế](./screenshots/A2_validation1.png)
 ![Kết quả Validation thực tế](./screenshots/A2_validation2.png)
 ![Kết quả Validation thực tế](./screenshots/A2_validation3.png)
 ![Kết quả Validation thực tế](./screenshots/A2_validation4.png)
