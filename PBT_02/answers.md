@@ -47,3 +47,29 @@
 ![Kết quả Validation thực tế](./screenshots/A2_validation3.png)
 ![Kết quả Validation thực tế](./screenshots/A2_validation4.png)
 ![Kết quả Validation thực tế](./screenshots/A2_validation5.png)
+## Câu A3 (5đ) — Accessibility
+
+*Nguồn tham chiếu: [Tên_file_chương_07.md] — Phần Accessibility*
+
+### 1. Tại sao `<label for="email">` quan trọng cho người dùng screen reader?
+- **Khả năng đọc hiểu:** Trình đọc màn hình (Screen Reader) không có mắt để nhìn thấy chữ "Email" nằm cạnh ô nhập liệu. Thuộc tính `for` trong `<label>` (chỉ tới `id` của `<input>`) tạo ra một **sự gắn kết bằng mã nguồn (programmatic association)**. Khi người khiếm thị trỏ vào ô nhập liệu, Screen Reader sẽ tự động đọc to nội dung của thẻ `<label>` được liên kết, giúp họ biết ô này dùng để nhập gì.
+- **Tiện ích bổ sung:** Ngoài việc hỗ trợ người khiếm thị, việc liên kết này giúp tăng diện tích click (người dùng chỉ cần bấm vào chữ "Email" là con trỏ chuột sẽ tự động nhảy vào ô input tương ứng).
+
+### 2. Khi nào dùng `<fieldset>` + `<legend>`? Cho ví dụ cụ thể.
+- **Cách dùng:** `<fieldset>` được sử dụng để nhóm các trường nhập liệu (inputs) có liên quan logic chặt chẽ với nhau thành một khối. `<legend>` hoạt động như một tiêu đề (caption) giải thích ý nghĩa cho toàn bộ khối `<fieldset>` đó. Nó cực kỳ quan trọng khi nhóm các nút `radio` hoặc `checkbox`.
+- **Ví dụ cụ thể:** Nhóm các lựa chọn về Giới tính hoặc Địa chỉ.
+```html
+<fieldset>
+    <legend>Chọn phương thức giao hàng:</legend>
+    
+    <input type="radio" id="express" name="shipping" value="express">
+    <label for="express">Giao hỏa tốc</label><br>
+    
+    <input type="radio" id="standard" name="shipping" value="standard">
+    <label for="standard">Giao tiêu chuẩn</label>
+</fieldset>
+```
+
+### 3. `aria-label` dùng khi nào? Tại sao KHÔNG nên dùng `aria-label` khi đã có `<label>`?**
+- **Dùng khi nào:** Dùng để cung cấp nhãn cho Screen Reader khi trên giao diện **không có văn bản hiển thị** (ví dụ: Nút tìm kiếm chỉ có biểu tượng kính lúp 🔍, hoặc nút đóng cửa sổ chỉ có dấu ❌).
+- **Tại sao KHÔNG nên dùng chung:** Nếu một thẻ input vừa có `<label>` (native) vừa có `aria-label`, trình đọc màn hình sẽ ưu tiên đọc `aria-label` và bỏ qua `<label>`. Nếu nội dung của hai thẻ này khác nhau, nó sẽ gây nhầm lẫn nghiêm trọng cho người khiếm thị. Nguyên tắc cao nhất trong Accessibility là: **Ưu tiên dùng thẻ HTML chuẩn (native) thay vì lạm dụng thuộc tính ARIA.**
