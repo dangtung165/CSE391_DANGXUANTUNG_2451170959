@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm tra Validation HTML5</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        form { max-width: 400px; padding: 20px; border: 1px solid #ccc; }
+        div { margin-bottom: 15px; }
+        input { padding: 5px; width: 100%; box-sizing: border-box; }
+        button { padding: 10px 20px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h2>Kiểm tra HTML5 Validation</h2>
+    
+    <form action="#">
+        <div>
+            <label>TH1 (required):</label>
+            <input type="text" required> 
+        </div>
+
+        <div>
+            <label>TH2 (email):</label>
+            <input type="email" value="abc">
+        </div>
+
+        <div>
+            <label>TH3 (number min/max):</label>
+            <input type="number" min="1" max="10" value="15">
+        </div>
+
+        <div>
+            <label>TH4 (pattern):</label>
+            <input type="text" pattern="[0-9]{10}" value="abc123" title="Vui lòng nhập đúng 10 chữ số">
+        </div>
+
+        <div>
+            <label>TH5 (minlength):</label>
+            <input type="password" minlength="8" value="123">
+        </div>
+
+        <button type="submit">Gửi Dữ Liệu</button>
+    </form>
+
+</body>
+</html>
