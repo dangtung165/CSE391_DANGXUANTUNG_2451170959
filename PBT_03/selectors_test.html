@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Selectors Test</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; margin: 20px; }
+        
+        /* 1 & 8. Chọn h1 / .top-bar.dark h1 */
+        .top-bar.dark h1 { 
+            background-color: lightgray; 
+            outline: 2px solid red; 
+        }
+
+        /* 2. Chọn .price */
+        .price { 
+            background-color: yellow; 
+            font-weight: bold;
+        }
+
+        /* 3. Chọn #app header */
+        #app header { 
+            border: 2px dashed blue; 
+            padding: 10px;
+        }
+
+        /* 4. Chọn nav a:first-child (và kết hợp 7. a[href="/"]) */
+        nav a:first-child { 
+            color: white; 
+            background-color: green; 
+            padding: 2px 5px;
+        }
+
+        /* 5. Chọn .product.featured h2 */
+        .product.featured h2 { 
+            color: purple; 
+            text-decoration: underline; 
+        }
+
+        /* 6. Chọn article > p */
+        article > p { 
+            border-left: 3px solid orange; 
+            padding-left: 10px; 
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <header class="top-bar dark">
+            <h1>ShopTLU</h1>
+            <nav>
+                <a href="/" class="active">Home</a>
+                <a href="/products">Products</a>
+                <a href="/about">About</a>
+            </nav>
+        </header>
+        <main>
+            <article class="product">
+                <h2>iPhone 16</h2>
+                <p class="price">25.990.000đ</p>
+                <p>Mô tả sản phẩm...</p>
+            </article>
+            <article class="product featured">
+                <h2>MacBook Pro</h2>
+                <p class="price">45.990.000đ</p>
+                <p>Mô tả sản phẩm...</p>
+            </article>
+        </main>
+    </div>
+</body>
+</html>
