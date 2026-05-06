@@ -11,6 +11,9 @@
 8. **type="search"** → Ô nhập text (có dấu X để xóa nhanh chữ) → Không có validation đặc biệt → Dùng cho thanh tìm kiếm sản phẩm ở Header.
 9. **type="url"** → Ô nhập text (bàn phím có sẵn / và .com) → Tự động bắt lỗi nếu link thiếu http:// hoặc https:// → Dùng cho các nhà bán hàng (Seller) nhập link shop của họ.
 10. **type="file"** → Nút "Choose File" kèm tên tệp → Sẽ chặn các đuôi file không hợp lệ nếu có thuộc tính `accept` → Dùng để khách hàng tải ảnh lên khi yêu cầu đổi/trả sản phẩm.
+
+---
+
 ## Câu A2 (5đ) — Validation Attributes
 
 ### 1. Dự đoán và Giải thích kết quả Validation
@@ -35,8 +38,6 @@
     *   **Dự đoán:** Trình duyệt chặn Submit và yêu cầu nhập thêm ký tự (ví dụ: *"Please lengthen this text to 8 characters or more"*).
     *   **Tại sao:** Thuộc tính `minlength="8"` quy định độ dài tối thiểu của chuỗi là 8 ký tự. Chuỗi "123" mới chỉ có độ dài là 3 nên không đủ điều kiện.
 
----
-
 ### 2. File kiểm thử `validation_test.html` và So sánh
 
 *(Ghi chú: Em đã tạo file `validation_test.html` để chạy thử nghiệm các trường hợp trên. Kết quả thực tế khi bấm Submit hoàn toàn trùng khớp với các dự đoán lý thuyết ở phần 1. Thông báo lỗi sẽ bật ra ngay tại ô input đầu tiên bị lỗi).*
@@ -47,9 +48,10 @@
 ![Kết quả Validation thực tế](./screenshots/A2_validation3.png)
 ![Kết quả Validation thực tế](./screenshots/A2_validation4.png)
 ![Kết quả Validation thực tế](./screenshots/A2_validation5.png)
-## Câu A3 (5đ) — Accessibility
 
-*Nguồn tham chiếu: [Tên_file_chương_07.md] — Phần Accessibility*
+---
+
+## Câu A3 (5đ) — Accessibility
 
 ### 1. Tại sao `<label for="email">` quan trọng cho người dùng screen reader?
 - **Khả năng đọc hiểu:** Trình đọc màn hình (Screen Reader) không có mắt để nhìn thấy chữ "Email" nằm cạnh ô nhập liệu. Thuộc tính `for` trong `<label>` (chỉ tới `id` của `<input>`) tạo ra một **sự gắn kết bằng mã nguồn (programmatic association)**. Khi người khiếm thị trỏ vào ô nhập liệu, Screen Reader sẽ tự động đọc to nội dung của thẻ `<label>` được liên kết, giúp họ biết ô này dùng để nhập gì.
@@ -73,3 +75,27 @@
 ### 3. `aria-label` dùng khi nào? Tại sao KHÔNG nên dùng `aria-label` khi đã có `<label>`?**
 - **Dùng khi nào:** Dùng để cung cấp nhãn cho Screen Reader khi trên giao diện **không có văn bản hiển thị** (ví dụ: Nút tìm kiếm chỉ có biểu tượng kính lúp 🔍, hoặc nút đóng cửa sổ chỉ có dấu ❌).
 - **Tại sao KHÔNG nên dùng chung:** Nếu một thẻ input vừa có `<label>` (native) vừa có `aria-label`, trình đọc màn hình sẽ ưu tiên đọc `aria-label` và bỏ qua `<label>`. Nếu nội dung của hai thẻ này khác nhau, nó sẽ gây nhầm lẫn nghiêm trọng cho người khiếm thị. Nguyên tắc cao nhất trong Accessibility là: **Ưu tiên dùng thẻ HTML chuẩn (native) thay vì lạm dụng thuộc tính ARIA.**
+
+---
+
+### Câu A4 (5đ) — Media
+
+*Nguồn tham chiếu: Chương ... (Bạn tự điền tên file tài liệu)*
+
+**1. Thuộc tính `loading="lazy"` trên thẻ `<img>`:**
+- **Giải thích & Cải thiện:** Trì hoãn việc tải hình ảnh cho đến khi người dùng cuộn màn hình tới gần vị trí của ảnh đó (thay vì tải toàn bộ ảnh cùng lúc khi vừa vào web). Nó giúp cải thiện đáng kể tốc độ tải trang ban đầu (Page Load Speed), tăng điểm hiệu năng (Core Web Vitals) và tiết kiệm băng thông mạng (Data).
+- **Khi nào KHÔNG nên dùng:** Tuyệt đối không dùng cho các hình ảnh nằm "above the fold" (những ảnh hiển thị ngay trên màn hình đầu tiên khi vừa vào trang web mà chưa cần cuộn, ví dụ: Logo, Banner Hero chính, Ảnh sản phẩm đầu tiên). Việc lạm dụng lazy load ở các ảnh này sẽ làm chậm trễ trải nghiệm nhìn thấy nội dung chính của người dùng.
+
+**2. Tại sao nên cung cấp nhiều `<source>` trong thẻ `<video>`?**
+- **Lý do:** Mỗi trình duyệt (Chrome, Safari, Firefox, Edge) hỗ trợ các định dạng và bộ giải mã (codec) video khác nhau. Bằng cách cung cấp nhiều thẻ `<source>`, trình duyệt sẽ tự động duyệt từ trên xuống dưới và chọn định dạng đầu tiên mà nó hỗ trợ để phát. Việc này giúp đảm bảo tính tương thích (Cross-browser compatibility) để video luôn xem được trên mọi thiết bị.
+- **3 format video web phổ biến:**
+  1. `MP4` (.mp4): Định dạng quốc dân, tương thích trên 100% các trình duyệt.
+  2. `WebM` (.webm): Định dạng tối ưu cho web do Google phát triển, dung lượng nhẹ hơn MP4 nhưng chất lượng cao.
+  3. `Ogg` (.ogv) hoặc định dạng mới `AV1`: Dùng làm phương án dự phòng bổ sung.
+
+**3. Thuộc tính `alt` trên `<img>` dùng để làm gì?**
+- **Tác dụng:** `alt` (Alternative text) cung cấp văn bản thay thế khi hình ảnh bị lỗi không tải được. Quan trọng hơn, nó là cốt lõi của Accessibility (Screen Reader sẽ đọc đoạn text này cho người khiếm thị hiểu ảnh) và là yếu tố bắt buộc của SEO (giúp Google Bot hiểu nội dung ảnh để xếp hạng tìm kiếm).
+- **Viết `alt` tốt cho 3 trường hợp cụ thể:**
+  - **Ảnh sản phẩm iPhone 16:** `alt="Điện thoại iPhone 16 Pro Max 256GB màu Titan Tự Nhiên chụp góc nghiêng từ mặt lưng"` (Cần mô tả thật chi tiết, rõ ràng đặc điểm của sản phẩm).
+  - **Ảnh trang trí (decorative):** `alt=""` (Bắt buộc phải có thẻ alt nhưng để giá trị rỗng. Khi đó trình đọc màn hình sẽ tự động bỏ qua ảnh này, giúp người khiếm thị không bị nghe các thông tin rác rưởi không cần thiết như viền, hoa văn...).
+  - **Ảnh biểu đồ doanh thu Q1/2026:** `alt="Biểu đồ cột thể hiện doanh thu Quý 1 năm 2026 đạt mức 500 tỷ đồng, tăng 15% so với Quý 4 năm 2025"` (Phải tóm tắt được thông tin/số liệu cốt lõi mà biểu đồ muốn truyền tải, vì người khiếm thị không thể nhìn thấy các cột hay đường thẳng trên biểu đồ).
