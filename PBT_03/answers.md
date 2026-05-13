@@ -227,3 +227,33 @@ Thẻ `.container` bao bọc bên ngoài được thiết lập chiều rộng c
     Giữ nguyên `content-box` mặc định, nhưng ta phải trừ bớt giá trị `width` ban đầu của mỗi khối đi một khoảng đúng bằng tổng padding và border của khối đó:
     *   `.sidebar`: `width` mới = 300 - 40 (padding) - 2 (border) = **258px**
     *   `.content`: `width` mới = 660 - 60 (padding) - 2 (border) = **598px**
+
+---
+
+## Câu C2 (10đ) — Cascade Puzzle (Giải mã Độ ưu tiên)
+
+**1. "Sản phẩm A" (`h2` trong `#featured`)**
+*   **font-size:** `20px`
+*   **color:** `green`
+*   **Giải thích:**
+    *   **`font-size`:** Thẻ này chịu tác động trực tiếp bởi rule `.card .title { font-size: 20px; }`. Do được nhắm mục tiêu trực tiếp, nó sẽ ghi đè các luật kế thừa font-size từ thẻ cha (`.container` 14px hay `body` 16px).
+    *   **`color`:** Có 2 rule cạnh tranh thiết lập màu sắc cho phần tử này là `#featured .title { color: red; }` (Specificity: 1,1,0) và `.highlight { color: green !important; }` (Specificity: 0,1,0). Theo quy tắc Specificity thông thường, ID sẽ thắng Class. Tuy nhiên, class `.highlight` có sử dụng từ khóa `!important`, từ khóa này phá vỡ mọi quy tắc tính điểm và giành quyền ưu tiên cao nhất. Kết quả hiển thị màu xanh lá (`green`).
+
+**2. "Mô tả sản phẩm" (`p` trong card `#featured`)**
+*   **color:** `blue`
+*   **Giải thích:** Thẻ `<p>` này bị nhắm trúng bởi rule `.card p { color: inherit; }`. Giá trị `inherit` bắt buộc phần tử này phải kế thừa màu sắc từ phần tử cha trực tiếp của nó (là thẻ `<div class="card" id="featured">`). Phần tử cha `.card` đang được áp dụng rule `.card { color: blue; }`. Do đó, thẻ `<p>` này sẽ kế thừa và hiển thị màu xanh dương (`blue`).
+
+**3. "Sản phẩm B" (`h2` trong `.card` thứ hai)**
+*   **font-size:** `20px`
+*   **color:** `blue`
+*   **Giải thích:**
+    *   **`font-size`:** Tương tự câu 1, phần tử này bị nhắm trúng bởi rule `.card .title { font-size: 20px; }`.
+    *   **`color`:** Không có bất kỳ rule CSS nào trực tiếp set thuộc tính `color` cho thẻ `<h2>` này. Theo cơ chế kế thừa mặc định của CSS (Inheritance), thẻ văn bản sẽ tự động lấy màu của thẻ cha gần nhất chứa nó. Thẻ cha của nó là `.card` đang có màu `blue`. Vì vậy, thẻ `<h2>` hiển thị màu xanh dương.
+
+**4. "Mô tả sản phẩm B" (`p.highlight` trong `.card` thứ hai)**
+*   **color:** `green`
+*   **Giải thích:** Thẻ `<p>` này chịu tác động bởi 2 rule: `.card p { color: inherit; }` (Specificity: 0,1,1) và `.highlight { color: green !important; }` (Specificity: 0,1,0). Mặc dù `.card p` có điểm Specificity cao hơn một chút ở cột thẻ element, nhưng sự xuất hiện của từ khóa `!important` trong class `.highlight` đã ghi đè tất cả các luật khác. Do đó, màu hiển thị là xanh lá (`green`).
+
+**Ảnh chụp màn hình kiểm chứng**
+
+![Kết quả Cascade Puzzle](./screenshots/C2_cascade_test.png)
