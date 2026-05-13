@@ -63,3 +63,36 @@ Nếu không có thẻ meta viewport, Safari trên iPhone (và các trình duy�
 
 ---
 
+### Câu A2 (5đ) — Breakpoints
+
+Dưới đây là các breakpoints chuẩn theo hệ thống Grid của Bootstrap 5, bao gồm kích thước, thiết bị đại diện và ví dụ ứng dụng cho lưới thẻ sản phẩm (Product Grid):
+
+**1. X-Small (xs)**
+*   **Kích thước:** Dưới 576px (`< 576px`)
+*   **Thiết bị đại diện:** Điện thoại di động (Mobile - cầm dọc).
+*   **Ví dụ lưới sản phẩm:** Hiển thị **1 cột** (Mỗi sản phẩm chiếm 100% chiều rộng màn hình để dễ bấm và dễ đọc chữ).
+
+**2. Small (sm)**
+*   **Kích thước:** Từ 576px trở lên (`≥ 576px`)
+*   **Thiết bị đại diện:** Điện thoại di động (cầm ngang) hoặc máy tính bảng cỡ nhỏ.
+*   **Ví dụ lưới sản phẩm:** Hiển thị **2 cột**.
+
+**3. Medium (md)**
+*   **Kích thước:** Từ 768px trở lên (`≥ 768px`)
+*   **Thiết bị đại diện:** Máy tính bảng (Tablet - như iPad cầm dọc).
+*   **Ví dụ lưới sản phẩm:** Hiển thị **3 cột**.
+
+**4. Large (lg)**
+*   **Kích thước:** Từ 992px trở lên (`≥ 992px`)
+*   **Thiết bị đại diện:** Laptop hoặc máy tính bảng màn hình lớn (cầm ngang).
+*   **Ví dụ lưới sản phẩm:** Hiển thị **4 cột**.
+
+**5. Extra Large (xl)**
+*   **Kích thước:** Từ 1200px trở lên (`≥ 1200px`)
+*   **Thiết bị đại diện:** Máy tính để bàn (Desktop / Monitor thông thường).
+*   **Ví dụ lưới sản phẩm:** Hiển thị **5 cột**.
+
+**6. Extra Extra Large (xxl)** *(Bổ sung của Bootstrap 5)*
+*   **Kích thước:** Từ 1400px trở lên (`≥ 1400px`)
+*   **Thiết bị đại diện:** Màn hình PC cỡ lớn (Large Desktop / TV).
+*   **Ví dụ lưới sản phẩm:** Hiển thị **6 cột** (hoặc căn giữa container và giữ nguyên 5 cột để layout không bị quá loãng).
