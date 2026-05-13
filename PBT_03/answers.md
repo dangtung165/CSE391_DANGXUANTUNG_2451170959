@@ -137,18 +137,36 @@ Quy tắc tính điểm theo hệ số (a: số lượng ID, b: số lượng Cl
 
 Trong file `style.css`, em đã sử dụng đầy đủ 5 loại selector (bộ chọn) khác nhau, cụ thể như sau:
 
-1. **Element Selector (Bộ chọn thẻ HTML):** 
+**1. Element Selector (Bộ chọn thẻ HTML):** 
    - Nhắm trực tiếp vào tên thẻ HTML.
    - *Ví dụ trong bài:* `body`, `header`, `footer`, `table`.
-2. **ID Selector (Bộ chọn ID):** 
+   - 
+**2. ID Selector (Bộ chọn ID):** 
    - Nhắm vào phần tử có thuộc tính id cụ thể (kí hiệu bằng dấu `#`).
    - *Ví dụ trong bài:* `#main-content` (Định dạng cho thẻ `<main>`).
-3. **Class Selector (Bộ chọn Lớp):** 
+   - 
+**3. Class Selector (Bộ chọn Lớp):** 
    - Nhắm vào các phần tử có chung class (kí hiệu bằng dấu `.`).
    - *Ví dụ trong bài:* `.active` (Định dạng riêng cho link đang được chọn).
-4. **Descendant Selector (Bộ chọn Con cháu):** 
+   - 
+**4. Descendant Selector (Bộ chọn Con cháu):** 
    - Nhắm vào một phần tử nằm bên trong một phần tử khác (cách nhau bởi dấu cách).
    - *Ví dụ trong bài:* `nav a` (Chỉ chọn các thẻ `<a>` nằm bên trong thẻ `<nav>`), `thead th` (Chỉ chọn thẻ `<th>` nằm trong `<thead>`).
-5. **Pseudo-class Selector (Bộ chọn Lớp giả):** 
+   - 
+**5. Pseudo-class Selector (Bộ chọn Lớp giả):** 
    - Nhắm vào trạng thái đặc biệt của một phần tử.
    - *Ví dụ trong bài:* `nav a:hover` (Trạng thái khi di chuột qua link), `tbody tr:nth-child(even)` (Chọn các thẻ `<tr>` ở vị trí chẵn để làm hiệu ứng ngựa vằn zebra-striping).
+
+---
+
+## Bài B2 — Box Model Lab (Phần 1)
+
+**1. Kết quả đo từ DevTools:**
+*   **Hộp 1 (content-box):** Chiều rộng thực tế hiển thị trên trình duyệt = **350px**.
+    *(Giải thích phép tính: `width` 300px + `padding` trái 20px + `padding` phải 20px + `border` trái 5px + `border` phải 5px).*
+*   **Hộp 2 (border-box):** Chiều rộng thực tế hiển thị trên trình duyệt = **300px**.
+    *(Lý do: Trình duyệt ép `padding` (40px) và `border` (10px) vào bên trong, lúc này phần không gian trống lõi chứa nội dung (content area) bị bóp nhỏ lại chỉ còn 250px).*
+
+**2. Giải thích sự khác biệt:**
+*   Với **`content-box`** (cách hoạt động mặc định), thuộc tính `width` chỉ định nghĩa chiều rộng của phần lõi chứa chữ. Bất kỳ padding hay border nào được thêm vào sẽ cộng dồn dội ra ngoài, làm cho tổng kích thước của khối hộp phình to ra. Điều này dễ làm vỡ layout nếu không tính toán kỹ.
+*   Với **`border-box`**, thuộc tính `width` định nghĩa tổng kích thước giới hạn cuối cùng của khối hộp (bao phủ toàn bộ content, padding và border). Khi bạn khai báo thêm padding hay border, trình duyệt sẽ tự động "ăn lẹm" vào không gian của content bên trong để đảm bảo kích thước tổng thể bên ngoài không bị vượt quá giới hạn đã đặt ra.
