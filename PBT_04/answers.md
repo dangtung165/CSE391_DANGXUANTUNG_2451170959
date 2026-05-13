@@ -88,3 +88,21 @@
     |  [ Item 7 ]  [ Trống  ]  [ Trống  ] |
     +-----------------------------------+
     ```
+---
+
+## Bài B1 (15đ) — Positioning Playground
+
+Dưới đây là các hình ảnh chứng minh việc áp dụng thành công các loại Positioning trong CSS:
+
+**1. Trạng thái Header khi scroll (chứng minh `position: fixed;`)**
+*Header luôn cố định sát mép trên màn hình kể cả khi đã cuộn chuột xuống.*
+![Fixed Header](./screenshots/B1_fixed-header.png)
+
+**2. Trạng thái Sidebar khi scroll (chứng minh `position: sticky;`)**
+*Sidebar cuộn theo trang cho đến khi cách đỉnh màn hình 80px thì nó bị "dính" lại, không trượt lên nữa.*
+![Sticky Sidebar](./screenshots/B1_sticky-sidebar.png)
+
+**3. Badge trên card sản phẩm & Nút Scroll to top**
+*   **Badge HOT:** Sử dụng `position: absolute` (tròn, nền đỏ, chữ trắng) đặt lơ lửng ở góc trên bên phải của khung Product Card (`position: relative`).
+*   **Nút ↑ (Scroll to top):** Sử dụng `position: fixed` giữ cố định vĩnh viễn ở góc dưới cùng bên phải màn hình.
+![Absolute Badge và Fixed Button](./screenshots/B1_badge-and-button.png)
