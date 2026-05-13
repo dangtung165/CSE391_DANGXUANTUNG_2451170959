@@ -96,3 +96,19 @@ Dưới đây là các breakpoints chuẩn theo hệ thống Grid của Bootstra
 *   **Kích thước:** Từ 1400px trở lên (`≥ 1400px`)
 *   **Thiết bị đại diện:** Màn hình PC cỡ lớn (Large Desktop / TV).
 *   **Ví dụ lưới sản phẩm:** Hiển thị **6 cột** (hoặc căn giữa container và giữ nguyên 5 cột để layout không bị quá loãng).
+
+---
+
+### Câu A3 (5đ) — Media Queries
+
+Đoạn CSS trên được viết theo tư duy **Mobile-First**, sử dụng `min-width` (chiều rộng tối thiểu). Khi màn hình lớn dần lên, các quy tắc `@media` ở dưới sẽ lần lượt ghi đè lên các quy tắc ở trên. 
+
+Dưới đây là bảng kết quả kích thước `.container` tương ứng:
+
+| Chiều rộng màn hình | `.container` width | Giải thích |
+| :--- | :--- | :--- |
+| **375px** (iPhone SE) | **100%** | Nhỏ hơn 576px, áp dụng rule CSS gốc ban đầu (`.container { width: 100%; }`). |
+| **600px** | **540px** | Vượt qua mốc 576px nhưng chưa tới mốc 768px, áp dụng rule `@media (min-width: 576px)`. |
+| **800px** | **720px** | Vượt qua mốc 768px nhưng chưa tới mốc 992px, áp dụng rule `@media (min-width: 768px)`. |
+| **1000px** | **960px** | Vượt qua mốc 992px nhưng chưa tới mốc 1200px, áp dụng rule `@media (min-width: 992px)`. |
+| **1400px** | **1140px** | Vượt qua mốc cao nhất 1200px, áp dụng rule cuối cùng `@media (min-width: 1200px)`. |
