@@ -82,6 +82,8 @@
 **Screenshot kiểm chứng:**
 ![Kết quả Selectors thực tế](./screenshots/A2_selectors.png)
 
+---
+
 ## Câu A3 (7đ) — Box Model — Tính toán kích thước
 
 **1. Trường hợp 1: content-box (mặc định)**
@@ -105,3 +107,26 @@
 **4. Nâng cao: Margin có số âm**
 *   **Khoảng cách:** `30px`
 *   **Giải thích:** Khi xảy ra hiện tượng Margin Collapse mà có một giá trị âm và một giá trị dương, trình duyệt sẽ áp dụng phép cộng đại số. Cách tính: 40px + (-10px) = 30px.
+
+---
+
+## Câu A4 (5đ) — Specificity (Độ ưu tiên)
+
+**1. Tính specificity score (a, b, c) cho mỗi rule:**
+Quy tắc tính điểm theo hệ số (a: số lượng ID, b: số lượng Class/Attributes/Pseudo-classes, c: số lượng Elements/Pseudo-elements):
+*   **Rule A (`p`):** (0, 0, 1) — Chỉ có 1 thẻ HTML.
+*   **Rule B (`.price`):** (0, 1, 0) — Chỉ có 1 class.
+*   **Rule C (`#main-price`):** (1, 0, 0) — Chỉ có 1 ID.
+*   **Rule D (`p.price`):** (0, 1, 1) — Có 1 class và 1 thẻ HTML.
+
+**2. Element sẽ có màu gì? Giải thích:**
+*   **Kết quả:** Màu **đỏ (red)**.
+*   **Giải thích:** Trình duyệt sẽ so sánh điểm Specificity của các rule cùng target vào một phần tử. Điểm của Rule C là (1, 0, 0) - cao nhất trong số 4 rule vì bộ chọn ID có trọng số lớn hơn class và thẻ HTML. Do đó, rule của `#main-price` sẽ được áp dụng.
+
+**3. Nếu thêm `<p class="price" id="main-price" style="color: orange;">`, element có màu gì?**
+*   **Kết quả:** Màu **cam (orange)**.
+*   **Giải thích:** CSS khai báo trực tiếp trên thẻ (Inline CSS) có độ ưu tiên cao hơn mọi CSS Selectors thông thường (ID, Class, Element). Điểm specificity của nó tương đương với mức (1, 0, 0, 0), do đó nó sẽ ghi đè màu đỏ của Rule C.
+
+**4. Nếu Rule A thêm `!important`, element có màu gì? Tại sao?**
+*   **Kết quả:** Màu **đen (black)**.
+*   **Giải thích:** Từ khóa `!important` là ngoại lệ lớn nhất, phá vỡ mọi quy tắc tính điểm Specificity thông thường. Dù Rule A (`p`) có bộ chọn yếu nhất, nhưng khi gắn thêm `!important`, trình duyệt sẽ ép buộc ưu tiên rule này lên hàng đầu. Nó sẽ ghi đè cả ID selector và Inline CSS (trừ khi các chỗ khác cũng dùng `!important`).
