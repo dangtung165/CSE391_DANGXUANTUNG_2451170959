@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Positioning Playground</title>
+    <link rel="stylesheet" href="positioning.css">
+</head>
+<body>
+
+    <header class="fixed-header">
+        <div class="logo">MyLogo</div>
+        <nav class="navigation">
+            <a href="#">Trang chủ</a>
+            <a href="#">Sản phẩm</a>
+            <a href="#">Liên hệ</a>
+        </nav>
+    </header>
+
+    <div class="layout-container">
+
+        <aside class="sticky-sidebar">
+            <h3>Danh mục</h3>
+            <ul>
+                <li>Thời trang nam</li>
+                <li>Thời trang nữ</li>
+                <li>Phụ kiện</li>
+                <li>Khuyến mãi</li>
+            </ul>
+        </aside>
+
+        <main class="content-area">
+            <h1>Sản phẩm nổi bật</h1>
+
+            <div class="product-grid">
+                <div class="product-card">
+                    <span class="badge">HOT</span>
+
+                    <div class="product-img">Ảnh sản phẩm</div>
+                    <h2 class="product-title">Áo thun Polo</h2>
+                    <p class="product-price">250.000 VNĐ</p>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img">Ảnh sản phẩm</div>
+                    <h2 class="product-title">Quần Jeans</h2>
+                    <p class="product-price">450.000 VNĐ</p>
+                </div>
+
+                <div class="product-card">
+                    <span class="badge">HOT</span>
+                    <div class="product-img">Ảnh sản phẩm</div>
+                    <h2 class="product-title">Giày Sneaker</h2>
+                    <p class="product-price">850.000 VNĐ</p>
+                </div>
+
+                <div class="product-card"><div class="product-img"></div><h2 class="product-title">Sản phẩm 4</h2></div>
+                <div class="product-card"><div class="product-img"></div><h2 class="product-title">Sản phẩm 5</h2></div>
+                <div class="product-card"><div class="product-img"></div><h2 class="product-title">Sản phẩm 6</h2></div>
+                <div class="product-card"><div class="product-img"></div><h2 class="product-title">Sản phẩm 7</h2></div>
+                <div class="product-card"><div class="product-img"></div><h2 class="product-title">Sản phẩm 8</h2></div>
+                <div class="product-card"><div class="product-img"></div><h2 class="product-title">Sản phẩm 9</h2></div>
+            </div>
+
+            <div style="height: 1000px; margin-top: 50px; padding: 20px; background: #e9ecef; border-radius: 8px;">
+                <p>Khu vực nội dung dài để cuộn chuột (Scroll Test Area)...</p>
+            </div>
+        </main>
+    </div>
+
+    <button class="scroll-to-top" onclick="window.scrollTo(0,0)">↑</button>
+
+</body>
+</html>
