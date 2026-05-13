@@ -112,3 +112,73 @@ Dưới đây là bảng kết quả kích thước `.container` tương ứng:
 | **800px** | **720px** | Vượt qua mốc 768px nhưng chưa tới mốc 992px, áp dụng rule `@media (min-width: 768px)`. |
 | **1000px** | **960px** | Vượt qua mốc 992px nhưng chưa tới mốc 1200px, áp dụng rule `@media (min-width: 992px)`. |
 | **1400px** | **1140px** | Vượt qua mốc cao nhất 1200px, áp dụng rule cuối cùng `@media (min-width: 1200px)`. |
+
+---
+
+### Câu A4 (5đ) — SCSS Basics
+
+**1. Giải thích 4 tính năng chính của SCSS (kèm ví dụ):**
+
+*   **Variables (Biến số):** Cho phép lưu trữ các giá trị thường dùng (màu sắc, font chữ, kích thước...) vào một biến bắt đầu bằng dấu `$`. Việc này giúp đồng bộ thiết kế và dễ dàng thay đổi hàng loạt chỉ với 1 lần sửa.
+    *   *Ví dụ:*
+        ```scss
+        $primary-color: #0d6efd;
+        $spacing-large: 20px;
+
+        .btn {
+            background-color: $primary-color;
+            margin-bottom: $spacing-large;
+        }
+        ```
+
+*   **Nesting (Viết lồng nhau):** Cho phép viết các CSS selectors lồng vào nhau theo đúng cấu trúc phân cấp của HTML. Giúp code gọn gàng, dễ đọc và tránh phải lặp lại tên class cha nhiều lần.
+    *   *Ví dụ:*
+        ```scss
+        nav {
+            background: #333;
+            ul {
+                list-style: none;
+            }
+            a {
+                color: white;
+                &:hover { /* Dấu & đại diện cho phần tử cha (a) */
+                    color: red;
+                }
+            }
+        }
+        ```
+
+*   **Mixins (`@mixin`, `@include`):** Là các khối code chứa một nhóm thuộc tính CSS có thể tái sử dụng ở nhiều nơi. Mixin đặc biệt mạnh mẽ vì nó có thể nhận tham số (arguments) truyền vào giống như hàm trong lập trình.
+    *   *Ví dụ:*
+        ```scss
+        @mixin flex-center($direction: row) {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: $direction;
+        }
+
+        .box {
+            @include flex-center(column); /* Gọi mixin và truyền tham số */
+            width: 200px;
+        }
+*   **`@extend` / Inheritance (Kế thừa):** Cho phép một class "mượn" (kế thừa) toàn bộ thuộc tính CSS của một class khác. Trình duyệt khi biên dịch sẽ tự động gộp các selector lại với nhau, giúp file CSS xuất ra nhẹ hơn so với việc dùng Mixin.
+    *   *Ví dụ:*
+        ```scss
+        .btn-base {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .btn-danger {
+            @extend .btn-base; /* Kế thừa toàn bộ từ .btn-base */
+            background-color: red;
+        }
+        ```
+**2. Tại sao trình duyệt KHÔNG đọc được file `.scss`?**
+Trình duyệt web (Chrome, Safari, Edge...) chỉ được lập trình để hiểu 3 ngôn ngữ cốt lõi là HTML, CSS chuẩn và JavaScript. SCSS là một "ngôn ngữ tiền xử lý" (CSS Preprocessor), nó có các cú pháp lập trình nâng cao (biến, vòng lặp, hàm...) mà trình duyệt hoàn toàn không biết cách thông dịch. 
+
+**3. Cần bước gì để chuyển SCSS → CSS?**
+Để trình duyệt hiểu được, ta bắt buộc phải có một bước gọi là **Biên dịch (Compile / Transpile)**. 
+Bạn phải sử dụng một công cụ biên dịch (ví dụ: cài đặt phần mềm Node Sass, Dart Sass, hoặc dùng Extension như *Live Sass Compiler* trên VS Code). Công cụ này sẽ đọc file `.scss`, xử lý các biến/logic lồng nhau, và tự động dịch (xuất ra) một file `.css` chuẩn mực để gắn vào thẻ `<link>` trong HTML.
