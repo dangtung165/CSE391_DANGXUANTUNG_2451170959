@@ -204,3 +204,26 @@ Trong file `style.css`, em đã sử dụng đầy đủ 5 loại selector (bộ
 
 **Kết quả hiển thị màu:**
 ![Kết quả chữ Hello World màu đỏ](./screenshots/B3_result.png)
+
+---
+
+## Câu C1 (10đ) — Debug CSS Layout
+
+**1. Tính chiều rộng thực tế (Box Model: content-box mặc định)**
+*   **Sidebar:** `width` (300px) + `padding` trái/phải (20px * 2) + `border` trái/phải (1px * 2) = **342px**
+*   **Content:** `width` (660px) + `padding` trái/phải (30px * 2) + `border` trái/phải (1px * 2) = **722px**
+*   **Tổng chiều rộng thực tế của 2 khối:** 342px + 722px = **1064px**
+
+**2. Giải thích tại sao layout bị vỡ**
+Thẻ `.container` bao bọc bên ngoài được thiết lập chiều rộng cố định là **960px**. Tuy nhiên, do trình duyệt sử dụng mô hình Box Model mặc định là `content-box`, nó sẽ cộng dồn padding và border vào kích thước tổng. Hậu quả là tổng chiều rộng thực tế của sidebar và content lên tới **1064px**. Vì 1064px vượt quá giới hạn 960px của container, không gian theo chiều ngang không đủ chứa cả hai khối đứng cạnh nhau, buộc khối `.content` bị đẩy (float drop) xuống dòng mới.
+
+**3. Đưa ra 2 cách sửa khác nhau**
+
+*   **Cách 1: Sử dụng `box-sizing: border-box` (Khuyên dùng)**
+    Chỉ cần thêm thuộc tính `box-sizing: border-box;` vào cả `.sidebar` và `.content`. Thuộc tính này sẽ "ép" padding và border nằm gọn vào bên trong kích thước `width` đã khai báo.
+    Lúc này tổng chiều rộng thực tế sẽ là: Sidebar (300px) + Content (660px) = Đúng 960px (vừa khít container).
+
+*   **Cách 2: Không dùng `border-box` (Tính toán lại Width thủ công)**
+    Giữ nguyên `content-box` mặc định, nhưng ta phải trừ bớt giá trị `width` ban đầu của mỗi khối đi một khoảng đúng bằng tổng padding và border của khối đó:
+    *   `.sidebar`: `width` mới = 300 - 40 (padding) - 2 (border) = **258px**
+    *   `.content`: `width` mới = 660 - 60 (padding) - 2 (border) = **598px**
