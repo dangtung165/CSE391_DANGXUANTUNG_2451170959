@@ -130,3 +130,25 @@ Quy tắc tính điểm theo hệ số (a: số lượng ID, b: số lượng Cl
 **4. Nếu Rule A thêm `!important`, element có màu gì? Tại sao?**
 *   **Kết quả:** Màu **đen (black)**.
 *   **Giải thích:** Từ khóa `!important` là ngoại lệ lớn nhất, phá vỡ mọi quy tắc tính điểm Specificity thông thường. Dù Rule A (`p`) có bộ chọn yếu nhất, nhưng khi gắn thêm `!important`, trình duyệt sẽ ép buộc ưu tiên rule này lên hàng đầu. Nó sẽ ghi đè cả ID selector và Inline CSS (trừ khi các chỗ khác cũng dùng `!important`).
+
+---
+
+## Bài B1 — Liệt kê 5 loại Selector sử dụng trong file `style.css`
+
+Trong file `style.css`, em đã sử dụng đầy đủ 5 loại selector (bộ chọn) khác nhau, cụ thể như sau:
+
+1. **Element Selector (Bộ chọn thẻ HTML):** 
+   - Nhắm trực tiếp vào tên thẻ HTML.
+   - *Ví dụ trong bài:* `body`, `header`, `footer`, `table`.
+2. **ID Selector (Bộ chọn ID):** 
+   - Nhắm vào phần tử có thuộc tính id cụ thể (kí hiệu bằng dấu `#`).
+   - *Ví dụ trong bài:* `#main-content` (Định dạng cho thẻ `<main>`).
+3. **Class Selector (Bộ chọn Lớp):** 
+   - Nhắm vào các phần tử có chung class (kí hiệu bằng dấu `.`).
+   - *Ví dụ trong bài:* `.active` (Định dạng riêng cho link đang được chọn).
+4. **Descendant Selector (Bộ chọn Con cháu):** 
+   - Nhắm vào một phần tử nằm bên trong một phần tử khác (cách nhau bởi dấu cách).
+   - *Ví dụ trong bài:* `nav a` (Chỉ chọn các thẻ `<a>` nằm bên trong thẻ `<nav>`), `thead th` (Chỉ chọn thẻ `<th>` nằm trong `<thead>`).
+5. **Pseudo-class Selector (Bộ chọn Lớp giả):** 
+   - Nhắm vào trạng thái đặc biệt của một phần tử.
+   - *Ví dụ trong bài:* `nav a:hover` (Trạng thái khi di chuột qua link), `tbody tr:nth-child(even)` (Chọn các thẻ `<tr>` ở vị trí chẵn để làm hiệu ứng ngựa vằn zebra-striping).
