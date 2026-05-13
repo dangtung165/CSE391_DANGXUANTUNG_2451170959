@@ -90,7 +90,7 @@
     ```
 ---
 
-## Bài B1 (15đ) — Positioning Playground
+## Bài B1 — Positioning Playground
 
 Dưới đây là các hình ảnh chứng minh việc áp dụng thành công các loại Positioning trong CSS:
 
@@ -106,3 +106,27 @@ Dưới đây là các hình ảnh chứng minh việc áp dụng thành công c
 *   **Badge HOT:** Sử dụng `position: absolute` (tròn, nền đỏ, chữ trắng) đặt lơ lửng ở góc trên bên phải của khung Product Card (`position: relative`).
 *   **Nút ↑ (Scroll to top):** Sử dụng `position: fixed` giữ cố định vĩnh viễn ở góc dưới cùng bên phải màn hình.
 ![Absolute Badge và Fixed Button](./screenshots/B1_badge-and-button.png)
+
+---
+
+## Câu C1 — Flexbox vs Grid: Khi nào dùng gì?
+
+**1. Navigation bar ngang (logo + menu + buttons)**
+*   **Lựa chọn:** **Flexbox**
+*   **Giải thích:** Đây là bố cục 1 chiều (trục ngang). Flexbox sinh ra để làm việc này. Nó rất xuất sắc trong việc căn giữa theo chiều dọc (`align-items: center`) và đẩy các cụm phần tử dạt ra hai mép hoặc cách đều nhau (`justify-content: space-between`).
+
+**2. Lưới ảnh Instagram (3 cột đều nhau, số ảnh không biết trước)**
+*   **Lựa chọn:** **Grid**
+*   **Giải thích:** Đây là bố cục 2 chiều nghiêm ngặt. Các bức ảnh phải thẳng hàng với nhau ở cả hàng và cột. CSS Grid với thuộc tính `grid-template-columns: repeat(3, 1fr)` sẽ tự động tạo lưới 3 cột hoàn hảo bất kể người dùng tải lên bao nhiêu bức ảnh.
+
+**3. Layout blog: main content + sidebar**
+*   **Lựa chọn:** **Grid** (hoặc kết hợp)
+*   **Giải thích:** Đây là cấu trúc vĩ mô (macro-layout) của cả một trang web. Grid kiểm soát bố cục vĩ mô rất tốt. Chỉ cần 1 dòng lệnh như `grid-template-columns: 1fr 300px;` là bạn đã có ngay phần nội dung chính co giãn linh hoạt và phần sidebar cố định.
+
+**4. Footer với 4 cột thông tin (Về chúng tôi, Liên kết, Hỗ trợ, Liên hệ)**
+*   **Lựa chọn:** **Grid** (Flexbox cũng dùng được nhưng Grid tối ưu hơn)
+*   **Giải thích:** Việc chia thành các cột đều tăm tắp theo tỷ lệ là điểm mạnh của Grid. Dùng `grid-template-columns: repeat(4, 1fr)` kèm theo `gap` sẽ giúp bố cục cực kỳ vững chắc. Đồng thời, Grid giúp chuyển đổi giao diện trên điện thoại (từ 4 cột gộp thành 2 cột hoặc 1 cột) dễ hơn rất nhiều so với Flexbox.
+
+**5. Card sản phẩm (ảnh trên, text giữa, nút dưới — nút luôn dính đáy)**
+*   **Lựa chọn:** **Flexbox**
+*   **Giải thích:** Card là một bố cục 1 chiều (trục dọc). Việc biến card thành `flex-direction: column` và sử dụng thủ thuật `margin-top: auto` cho nút bấm để đẩy nó dính chặt xuống đáy là một "đặc sản" vô cùng mạnh mẽ của Flexbox.
