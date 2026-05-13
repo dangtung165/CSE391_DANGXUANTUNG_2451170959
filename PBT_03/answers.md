@@ -171,6 +171,12 @@ Trong file `style.css`, em đã sử dụng đầy đủ 5 loại selector (bộ
 *   Với **`content-box`** (cách hoạt động mặc định), thuộc tính `width` chỉ định nghĩa chiều rộng của phần lõi chứa chữ. Bất kỳ padding hay border nào được thêm vào sẽ cộng dồn dội ra ngoài, làm cho tổng kích thước của khối hộp phình to ra. Điều này dễ làm vỡ layout nếu không tính toán kỹ.
 *   Với **`border-box`**, thuộc tính `width` định nghĩa tổng kích thước giới hạn cuối cùng của khối hộp (bao phủ toàn bộ content, padding và border). Khi bạn khai báo thêm padding hay border, trình duyệt sẽ tự động "ăn lẹm" vào không gian của content bên trong để đảm bảo kích thước tổng thể bên ngoài không bị vượt quá giới hạn đã đặt ra.
 
+**Ảnh chụp màn hình Hộp 1 (Content-Box):**
+![Box Model Hộp 1](./screenshots/B2_tabComputed_Box1.png)
+
+**Ảnh chụp màn hình Hộp 2 (Border-Box):**
+![Box Model Hộp 2](./screenshots/B2_tabComputed_Box2.png)
+
 ---
 
 ## Bài B3 (15đ) — Specificity Battle
@@ -195,3 +201,6 @@ Trong file `style.css`, em đã sử dụng đầy đủ 5 loại selector (bộ
 **3. Thay đổi thứ tự rules trong CSS file. Kết quả có đổi không? Giải thích.**
 - **Kết quả:** KHÔNG THAY ĐỔI (Vẫn là màu Đỏ).
 - **Giải thích:** Trong CSS, thứ tự viết code (hay còn gọi là tính chất Cascade - xếp tầng) chỉ có tác dụng "phá vỡ thế hòa" khi 2 rules có **cùng mức điểm Specificity**. Ở ví dụ trên, toàn bộ 10 rules đều có điểm Specificity chênh lệch và khác nhau hoàn toàn. Do đó, điểm Specificity đã quyết định xong "người chiến thắng", vị trí của dòng code (nằm trên hay nằm dưới) không còn ý nghĩa nữa.
+
+**Kết quả hiển thị màu:**
+![Kết quả chữ Hello World màu đỏ](./screenshots/B3_result.png)
