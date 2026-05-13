@@ -1,0 +1,112 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; color: #333; padding: 20px; }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 200px minmax(300px, 1fr) 200px;
+    gap: 20px;
+    grid-template-areas:
+        "header header header"
+        "hero hero hero"
+        "sidebar main ads"
+        "footer footer footer";
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header  { grid-area: header; }
+.hero    { grid-area: hero; }
+.sidebar { grid-area: sidebar; }
+.main-content { grid-area: main; }
+.ads     { grid-area: ads; }
+.footer  { grid-area: footer; }
+
+.header, .footer {
+    background-color: #1a1a1a;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+}
+.header { display: flex; justify-content: space-between; align-items: center; }
+.header a { color: #fff; text-decoration: none; font-weight: bold; }
+
+.hero {
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    border-radius: 8px;
+    padding: 30px;
+    color: white;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: center;
+}
+
+.hero-content {
+    grid-column: 1 / 2;
+}
+
+.hero-featured-card {
+    grid-column: span 2;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 30px;
+    border-radius: 8px;
+    border: 2px dashed #fff;
+    text-align: center;
+}
+
+.sidebar {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    gap: 10px;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.card {
+    background-color: white;
+    height: 200px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #666;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+    background-color: #e3f2fd;
+    color: #0d6efd;
+}
+
+.ads {
+    display: flex;
+    flex-direction: column;
+}
+
+.ad-banner {
+    background-color: #e0e0e0;
+    flex: 1;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    border: 2px dashed #ccc;
+}
