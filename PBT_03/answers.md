@@ -170,3 +170,28 @@ Trong file `style.css`, em đã sử dụng đầy đủ 5 loại selector (bộ
 **2. Giải thích sự khác biệt:**
 *   Với **`content-box`** (cách hoạt động mặc định), thuộc tính `width` chỉ định nghĩa chiều rộng của phần lõi chứa chữ. Bất kỳ padding hay border nào được thêm vào sẽ cộng dồn dội ra ngoài, làm cho tổng kích thước của khối hộp phình to ra. Điều này dễ làm vỡ layout nếu không tính toán kỹ.
 *   Với **`border-box`**, thuộc tính `width` định nghĩa tổng kích thước giới hạn cuối cùng của khối hộp (bao phủ toàn bộ content, padding và border). Khi bạn khai báo thêm padding hay border, trình duyệt sẽ tự động "ăn lẹm" vào không gian của content bên trong để đảm bảo kích thước tổng thể bên ngoài không bị vượt quá giới hạn đã đặt ra.
+
+---
+
+## Bài B3 (15đ) — Specificity Battle
+
+**1. Liệt kê 10 rules + Specificity score:**
+*(Điểm được tính theo hệ số (a,b,c) tương ứng: a = ID, b = Class/Pseudo-class/Attribute, c = Element/Pseudo-element)*
+1. `*` → Specificity: **(0,0,0)** (Màu xám)
+2. `p` → Specificity: **(0,0,1)** (Màu nâu)
+3. `.text` → Specificity: **(0,1,0)** (Màu hồng)
+4. `p.text` → Specificity: **(0,1,1)** (Màu cam)
+5. `.text.highlight` → Specificity: **(0,2,0)** (Màu vàng)
+6. `p.text.highlight` → Specificity: **(0,2,1)** (Màu tím)
+7. `#demo` → Specificity: **(1,0,0)** (Màu cyan)
+8. `p#demo` → Specificity: **(1,0,1)** (Màu xanh dương)
+9. `#demo.text.highlight` → Specificity: **(1,2,0)** (Màu xanh lá)
+10. `p#demo.text.highlight` → Specificity: **(1,2,1)** (Màu đỏ)
+
+**2. Element cuối cùng hiển thị màu gì? Tại sao?**
+- **Kết quả:** Chữ "Hello World" hiển thị màu **Đỏ (Red)**.
+- **Tại sao:** Trình duyệt khi đọc CSS sẽ tính điểm Specificity cho tất cả các rule nhắm vào cùng 1 phần tử. Rule số 10 (`p#demo.text.highlight`) có điểm cao nhất là (1,2,1). Vì điểm này áp đảo tất cả các rule còn lại, trình duyệt sẽ quyết định dùng màu đỏ của nó để hiển thị.
+
+**3. Thay đổi thứ tự rules trong CSS file. Kết quả có đổi không? Giải thích.**
+- **Kết quả:** KHÔNG THAY ĐỔI (Vẫn là màu Đỏ).
+- **Giải thích:** Trong CSS, thứ tự viết code (hay còn gọi là tính chất Cascade - xếp tầng) chỉ có tác dụng "phá vỡ thế hòa" khi 2 rules có **cùng mức điểm Specificity**. Ở ví dụ trên, toàn bộ 10 rules đều có điểm Specificity chênh lệch và khác nhau hoàn toàn. Do đó, điểm Specificity đã quyết định xong "người chiến thắng", vị trí của dòng code (nằm trên hay nằm dưới) không còn ý nghĩa nữa.
