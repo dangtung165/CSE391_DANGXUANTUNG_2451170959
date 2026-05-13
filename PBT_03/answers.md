@@ -81,3 +81,27 @@
 
 **Screenshot kiểm chứng:**
 ![Kết quả Selectors thực tế](./screenshots/A2_selectors.png)
+
+## Câu A3 (7đ) — Box Model — Tính toán kích thước
+
+**1. Trường hợp 1: content-box (mặc định)**
+*   **Chiều rộng hiển thị (Visible width):** `450px`
+    *   *Cách tính:* width (400) + padding trái (20) + padding phải (20) + border trái (5) + border phải (5) = 450px.
+*   **Không gian chiếm trên trang (Total space):** `470px`
+    *   *Cách tính:* Chiều rộng hiển thị (450) + margin trái (10) + margin phải (10) = 470px.
+
+**2. Trường hợp 2: border-box**
+*   **Chiều rộng hiển thị (Visible width):** `400px`
+    *   *Cách tính:* Thuộc tính `box-sizing: border-box` sẽ ép toàn bộ padding và border nằm gọn bên trong kích thước `width` đã khai báo ban đầu.
+*   **Kích thước content thực tế (Actual content width):** `350px`
+    *   *Cách tính:* width tổng (400) - padding trái (20) - padding phải (20) - border trái (5) - border phải (5) = 350px.
+*   **Không gian chiếm trên trang (Total space):** `420px`
+    *   *Cách tính:* Chiều rộng hiển thị (400) + margin trái (10) + margin phải (10) = 420px.
+
+**3. Trường hợp 3: Margin collapse (Sáp nhập lề)**
+*   **Khoảng cách giữa box-a và box-b:** `40px`
+*   **Giải thích tại sao KHÔNG PHẢI 65px:** Đây là hiện tượng "Margin Collapse" (Sáp nhập lề) đặc trưng trong CSS. Khi hai margin dọc (top và bottom) của hai thẻ block liền kề chạm nhau, trình duyệt sẽ không cộng dồn chúng lại (25 + 40 = 65) mà sẽ gộp chúng lại và chỉ lấy giá trị **lớn hơn** (ở đây là 40px).
+
+**4. Nâng cao: Margin có số âm**
+*   **Khoảng cách:** `30px`
+*   **Giải thích:** Khi xảy ra hiện tượng Margin Collapse mà có một giá trị âm và một giá trị dương, trình duyệt sẽ áp dụng phép cộng đại số. Cách tính: 40px + (-10px) = 30px.
