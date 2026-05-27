@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Product Page - B1</title>
+    <link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">TTTV Shop</div>
+        
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="hamburger">&#9776;</label>
+        
+        <nav class="nav-menu">
+            <a href="#" class="active">Trang chủ</a>
+            <a href="#">Sản phẩm</a>
+            <a href="#">Tin tức</a>
+            <a href="#">Liên hệ</a>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        
+        <aside class="sidebar">
+            <h3>Bộ lọc sản phẩm</h3>
+            <div class="filter-group">
+                <label for="category">Danh mục:</label>
+                <select id="category">
+                    <option>Tất cả sản phẩm</option>
+                    <option>Điện thoại</option>
+                    <option>Laptop</option>
+                    <option>Phụ kiện</option>
+                </select>
+            </div>
+            <div class="filter-group desktop-only">
+                <h4>Khoảng giá</h4>
+                <label><input type="checkbox"> Dưới 5 triệu</label><br>
+                <label><input type="checkbox"> 5 - 15 triệu</label><br>
+                <label><input type="checkbox"> Trên 15 triệu</label>
+            </div>
+        </aside>
+
+        <main class="product-grid">
+            <div class="product-card">
+                <img src="https://picsum.photos/300/200?random=1" alt="Sản phẩm 1" class="product-img">
+                <div class="product-info">
+                    <h4 class="product-title">Sản phẩm Premium 01</h4>
+                    <p class="product-price">15.000.000 đ</p>
+                    <button class="btn-buy">Mua ngay</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://picsum.photos/300/200?random=2" alt="Sản phẩm 2" class="product-img">
+                <div class="product-info">
+                    <h4 class="product-title">Sản phẩm Premium 02</h4>
+                    <p class="product-price">12.500.000 đ</p>
+                    <button class="btn-buy">Mua ngay</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://picsum.photos/300/200?random=3" alt="Sản phẩm 3" class="product-img">
+                <div class="product-info">
+                    <h4 class="product-title">Sản phẩm Premium 03</h4>
+                    <p class="product-price">8.900.000 đ</p>
+                    <button class="btn-buy">Mua ngay</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://picsum.photos/300/200?random=4" alt="Sản phẩm 4" class="product-img">
+                <div class="product-info">
+                    <h4 class="product-title">Sản phẩm Premium 04</h4>
+                    <p class="product-price">24.000.000 đ</p>
+                    <button class="btn-buy">Mua ngay</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://picsum.photos/300/200?random=5" alt="Sản phẩm 5" class="product-img">
+                <div class="product-info">
+                    <h4 class="product-title">Sản phẩm Premium 05</h4>
+                    <p class="product-price">5.500.000 đ</p>
+                    <button class="btn-buy">Mua ngay</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://picsum.photos/300/200?random=6" alt="Sản phẩm 6" class="product-img">
+                <div class="product-info">
+                    <h4 class="product-title">Sản phẩm Premium 06</h4>
+                    <p class="product-price">19.990.000 đ</p>
+                    <button class="btn-buy">Mua ngay</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://picsum.photos/300/200?random=7" alt="Sản phẩm 7" class="product-img">
+                <div class="product-info">
+                    <h4 class="product-title">Sản phẩm Premium 07</h4>
+                    <p class="product-price">3.200.000 đ</p>
+                    <button class="btn-buy">Mua ngay</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://picsum.photos/300/200?random=8" alt="Sản phẩm 8" class="product-img">
+                <div class="product-info">
+                    <h4 class="product-title">Sản phẩm Premium 08</h4>
+                    <p class="product-price">11.000.000 đ</p>
+                    <button class="btn-buy">Mua ngay</button>
+                </div>
+            </div>
+        </main>
+
+        <aside class="ads-bar">
+            <div class="ads-slot">Quảng cáo 1</div>
+            <div class="ads-slot">Quảng cáo 2</div>
+        </aside>
+
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 TTTV Shop. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
