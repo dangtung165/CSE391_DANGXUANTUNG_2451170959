@@ -182,3 +182,15 @@ Trình duyệt web (Chrome, Safari, Edge...) chỉ được lập trình để h
 **3. Cần bước gì để chuyển SCSS → CSS?**
 Để trình duyệt hiểu được, ta bắt buộc phải có một bước gọi là **Biên dịch (Compile / Transpile)**. 
 Bạn phải sử dụng một công cụ biên dịch (ví dụ: cài đặt phần mềm Node Sass, Dart Sass, hoặc dùng Extension như *Live Sass Compiler* trên VS Code). Công cụ này sẽ đọc file `.scss`, xử lý các biến/logic lồng nhau, và tự động dịch (xuất ra) một file `.css` chuẩn mực để gắn vào thẻ `<link>` trong HTML.
+
+### Câu B3 (20đ) — SCSS Refactor
+
+Để biên dịch toàn bộ cấu trúc các file thành phần `.scss` từ thư mục `scss/` ra một file chạy duy nhất `responsive.css` ngoài thư mục gốc, sử dụng công cụ Dart Sass thông qua CLI:
+
+```bash
+# Lệnh biên dịch một lần duy nhất
+sass scss/style.scss responsive.css
+
+# Mẹo bổ sung: Lệnh tự động theo dõi (Watch) thay đổi khi code để tự compile tự động
+sass --watch scss/style.scss:responsive.css
+```
