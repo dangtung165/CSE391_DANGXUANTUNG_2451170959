@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Landing Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">ShopBrand</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Sản phẩm</a></li>
+                </ul>
+                <form class="d-flex me-3">
+                    <input class="form-control me-2" type="search" placeholder="Tìm kiếm">
+                    <button class="btn btn-outline-light" type="submit">Tìm</button>
+                </form>
+                <button class="btn btn-primary">Giỏ hàng (0)</button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="heroCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="bg-secondary text-white d-flex justify-content-center align-items-center" style="height: 400px;">
+                    <h2>Chào mừng đến với cửa hàng</h2>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="bg-info text-white d-flex justify-content-center align-items-center" style="height: 400px;">
+                    <h2>Bộ sưu tập mùa hè</h2>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="bg-primary text-white d-flex justify-content-center align-items-center" style="height: 400px;">
+                    <h2>Giảm giá lên đến 50%</h2>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+
+    <div class="container mb-5">
+        <h3 class="text-center mb-4">Sản Phẩm Nổi Bật</h3>
+        <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="card h-100 position-relative">
+                    <span class="badge bg-danger position-absolute top-0 end-0 m-2">Sale</span>
+                    <div class="bg-light w-100 d-flex justify-content-center align-items-center card-img-top" style="height: 200px;">[Ảnh SP]</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Sản phẩm 1</h5>
+                        <p class="card-text">Mô tả ngắn gọn về sản phẩm này.</p>
+                        <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#quickViewModal">Xem nhanh</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="card h-100">
+                    <div class="bg-light w-100 d-flex justify-content-center align-items-center card-img-top" style="height: 200px;">[Ảnh SP]</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Sản phẩm 2</h5>
+                        <p class="card-text">Mô tả ngắn gọn.</p>
+                        <button class="btn btn-outline-primary w-100">Xem nhanh</button>
+                    </div>
+                </div>
+            </div>
+             <div class="col-12 col-md-6 col-lg-3">
+                <div class="card h-100">
+                    <div class="bg-light w-100 d-flex justify-content-center align-items-center card-img-top" style="height: 200px;">[Ảnh SP]</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Sản phẩm 3</h5>
+                        <p class="card-text">Mô tả ngắn gọn.</p>
+                        <button class="btn btn-outline-primary w-100">Xem nhanh</button>
+                    </div>
+                </div>
+            </div>
+             <div class="col-12 col-md-6 col-lg-3">
+                <div class="card h-100 position-relative">
+                    <span class="badge bg-danger position-absolute top-0 end-0 m-2">Sale</span>
+                    <div class="bg-light w-100 d-flex justify-content-center align-items-center card-img-top" style="height: 200px;">[Ảnh SP]</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Sản phẩm 4</h5>
+                        <p class="card-text">Mô tả ngắn gọn.</p>
+                        <button class="btn btn-outline-primary w-100">Xem nhanh</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="quickViewModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Chi tiết sản phẩm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    Thông tin chi tiết của sản phẩm sẽ hiển thị ở đây.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary">Thêm vào giỏ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white pt-5 pb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-3 mb-3">
+                    <h5>Về chúng tôi</h5>
+                    <p>Thông tin công ty.</p>
+                </div>
+                <div class="col-12 col-md-3 mb-3">
+                    <h5>Liên kết</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white text-decoration-none">Chính sách</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Điều khoản</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-3 mb-3">
+                    <h5>Hỗ trợ</h5>
+                    <p>Hotline: 1900 1234</p>
+                </div>
+                <div class="col-12 col-md-3 mb-3">
+                    <h5>Mạng xã hội</h5>
+                    <p>Facebook | Instagram</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
