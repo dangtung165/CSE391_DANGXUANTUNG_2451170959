@@ -104,3 +104,62 @@ var html = `<div class="card">
     <p>${description}</p>
     <span>Giá: ${price}đ</span>
 </div>`;
+```
+
+---
+
+### Câu C1 — Debug JavaScript
+
+#### 1. Vạch lá tìm lỗi (Danh sách lỗi phát hiện)
+
+**1. Lỗi sử dụng sai toán tử gán trong câu lệnh điều kiện:** Tại dòng `if (giaSauGiam = 0)`, dấu `=` đơn đại diện cho phép gán. Nó sẽ gán giá trị số `0` vào biến `giaSauGiam`, biểu thức điều kiện lúc này tương đương `if (0)` (luôn là Falsy) khiến khối mã bên trong không bao giờ chạy, đồng thời làm sai lệch giá trị trả về của hàm.
+   * *Cách sửa:* Đổi thành toán tử so sánh nghiêm ngặt `===` (`if (giaSauGiam === 0)`).
+
+**2. Lỗi không đồng nhất dữ liệu đầu vào:** Tại vị trí gọi hàm test `tinhGiaGiamGia("100000", 20)`, tham số thứ nhất đang được truyền vào dưới dạng một chuỗi (String) thay vì một số (Number) đúng chuẩn.
+   * *Cách sửa:* Đổi thành giá trị số `100000` khi gọi hàm, hoặc chủ động ép kiểu dữ liệu bằng `Number()` ở ngay đầu hàm để tăng tính an toàn.
+
+**3. Lỗi kiểm soát kiểu dữ liệu trả về (Data Consistency):** Hàm trả về một chuỗi báo lỗi `"Phần trăm giảm không hợp lệ"` khi kiểm tra điều kiện thất bại, tuy nhiên phía bên ngoài lại dùng kết quả đó để cộng gộp trực tiếp với chuỗi hiển thị đơn vị: `gia2`. Điều này khiến log in ra bị lem nhem (`Giá: Phần trăm giảm không hợp lệ`).
+   * *Cách sửa:* Trả về giá trị lỗi chuẩn, ném ra một ngoại lệ (`throw new Error`), hoặc kiểm tra kỹ giá trị biến trước khi in.
+
+**4. Lỗi "ẩn" bất đồng bộ do phạm vi biến của hằng vòng lặp:** Sử dụng `var i = 0` trong vòng lặp kết hợp hàm `setTimeout`. Biến khai báo bằng `var` mang phạm vi hàm/toàn cục (không có block scope). Khi vòng lặp chạy xong rất nhanh, giá trị chung của biến `i` đã tăng lên mức `5`. Khi các hàm callback trong `setTimeout` đồng loạt kích hoạt sau 1 giây, chúng đều đọc giá trị cuối cùng này và in ra chuỗi `Item 5` liên tục 5 lần.
+   * *Cách sửa:* Thay thế `var i` bằng `let i` để tạo ra một block scope riêng biệt cho từng chu kỳ lặp, giúp giữ đúng giá trị của `i` tại thời điểm đó.
+
+**5. Thiếu dấu chấm phẩy dứt câu lệnh (;):** Thiếu sót trên diện rộng ở các dòng lệnh khai báo và lệnh trả về, dễ gây lỗi phân tách câu lệnh khi mã nguồn được nén/gộp (minify).
+
+#### 2. Đoạn mã nguồn sau khi đã được Refactor chuẩn chỉnh
+
+```javascript
+function tinhGiaGiamGia(giaBan, phanTramGiam) {
+    // Ép kiểu chủ động đảm bảo an toàn dữ liệu tính toán
+    const gia = Number(giaBan);
+    const phanTram = Number(phanTramGiam);
+
+    if (isNaN(gia) || isNaN(phanTram) || gia < 0 || phanTram < 0 || phanTram > 100) {
+        return "Lỗi: Tham số đầu vào không hợp lệ!";
+    }
+    
+    const giamGia = (gia * phanTram) / 100;
+    const giaSauGiam = gia - giamGia;
+    
+    // Đã sửa dấu = thành toán tử so sánh nghiêm ngặt ===
+    if (giaSauGiam === 0) {
+        console.log("Sản phẩm miễn phí!");
+    }
+    
+    return giaSauGiam;
+}
+
+// Chạy thử nghiệm Case 1
+const gia = tinhGiaGiamGia("100000", 20); 
+console.log("Giá sau giảm: " + gia + "đ");
+
+// Chạy thử nghiệm Case 2
+const gia2 = tinhGiaGiamGia(50000, 110);
+console.log(gia2); 
+
+// Sửa 'var' thành 'let' để tạo cơ chế Block Scope cho từng chu kỳ lặp
+for (let i = 0; i < 5; i++) {
+    setTimeout(function() {
+        console.log("Item " + i);
+    }, 1000);
+}
