@@ -121,3 +121,18 @@ Spread operator (`{ ...product }`) chỉ tạo ra **"Shallow Copy"** (sao chép 
 Các property kiểu nguyên thủy (như `name`, `price`) được copy giá trị. Nhưng các object con (như `specs`) thì chỉ được copy tham chiếu (reference) vùng nhớ. Do đó, `copy` và `product` vẫn trỏ chung vào cùng một object `specs`. Khi thay đổi `copy.specs.ram`, giá trị bên trong object gốc cũng bị thay đổi theo.
 
 ---
+
+## Câu C1 (10đ) — Refactor Code
+
+Refactor sử dụng array methods + arrow functions (viết theo chuẩn Functional Programming, gọn gàng và không mutate mảng gốc):
+
+```javascript
+const processOrders = orders => orders
+    .filter(o => o.status === "completed" && o.total > 100000)
+    .map(({ id, customer, total }) => ({
+        id, customer, total, discount: total * 0.1, finalTotal: total * 0.9
+    }))
+    .sort((a, b) => b.finalTotal - a.finalTotal);
+```
+
+---
