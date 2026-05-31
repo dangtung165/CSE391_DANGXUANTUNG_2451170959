@@ -88,3 +88,19 @@ Mọi giá trị trong JavaScript khi đưa vào điều kiện logic đều là
 * `if (" ")` $\rightarrow$ **In chữ H** (Chuỗi chứa ký tự khoảng trắng không phải chuỗi rỗng $\rightarrow$ Truthy)
 
 ---
+
+### Câu A5 — Template Literals
+
+```javascript
+// Cách 1:
+var greeting = `Xin chào ${name}! Bạn ${age} tuổi.`;
+
+// Cách 2:
+var url = `https://api.example.com/users/${userId}/orders?page=${page}`;
+
+// Cách 3:
+var html = `<div class="card">
+    <h2>${title}</h2>
+    <p>${description}</p>
+    <span>Giá: ${price}đ</span>
+</div>`;
