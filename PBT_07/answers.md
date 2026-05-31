@@ -19,3 +19,26 @@
 * **Đoạn 5 (Phạm vi khối - Block Scope):** Biến `let` có phạm vi bó hẹp bên trong cặp ngoặc nhọn `{}`. Biến `let a = 2` bên trong khối là một thực thể độc lập (shadowing), hoàn toàn không ảnh hưởng hay ghi đè lên biến `let a = 1` ở môi trường bên ngoài.
 
 ---
+
+### Câu A2 — Data Types & Coercion
+
+#### 1. Dự đoán kết quả biểu thức
+
+| Biểu thức lệnh | Kết quả dự đoán | Bản chất/Kiểu dữ liệu |
+| :--- | :--- | :--- |
+| `typeof null` | `"object"` | Lỗi thiết kế kinh điển của JavaScript (Bug lịch sử) |
+| `typeof undefined` | `"undefined"` | Kiểu nguyên thủy độc lập |
+| `typeof NaN` | `"number"` | Viết tắt của "Not a Number" nhưng thuộc kiểu số |
+| `"5" + 3` | `"53"` | Ưu tiên ép kiểu thành Chuỗi (String) để nối |
+| `"5" - 3` | `2` | Ưu tiên ép kiểu thành Số (Number) để tính toán |
+| `"5" * "3"` | `15` | Ép cả hai vế về dạng Số để thực hiện phép nhân |
+| `true + true` | `2` | `true` chuyển thành số `1`, phép tính trở thành: `1 + 1` |
+| `[] + []` | `""` | Mảng rỗng chuyển thành chuỗi rỗng |
+| `[] + {}` | `"[object Object]"` | Chuyển mảng thành `""` và đối tượng thành chuỗi định danh |
+| `{} + []` | `"[object Object]"` | Tương tự dòng trên khi nằm trong hàm `console.log()` |
+
+#### 2. Giải thích sự khác biệt giữa `"5" + 3` và `"5" - 3`
+* **Toán tử cộng (`+`):** Đóng vai trò kép trong JavaScript (vừa là toán tử số học, vừa là toán tử nối chuỗi). Khi phát hiện một trong hai vế có kiểu chuỗi, JavaScript sẽ ưu tiên chuyển vế còn lại sang kiểu chuỗi rồi thực hiện **nối chuỗi**. Kết quả: `"5" + "3"` $\rightarrow$ `"53"`.
+* **Toán tử trừ (`-`):** Chỉ phục vụ duy nhất một mục đích toán học. JavaScript buộc phải chuyển đổi chuỗi `"5"` về dạng số nguyên `5` trước khi thực hiện phép tính. Kết quả: `5 - 3` $\rightarrow$ `2`.
+
+---
