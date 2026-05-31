@@ -63,3 +63,28 @@ Luôn luôn ưu tiên tuyệt đối việc sử dụng toán tử so sánh nghi
 * Toán tử `===` (Strict Equality) yêu cầu nghiêm ngặt cả về **Giá trị** lẫn **Kiểu dữ liệu**. Nếu hai vế không đồng nhất kiểu dữ liệu, hệ thống lập tức trả về `false`, giúp mã nguồn minh bạch, an toàn và dễ kiểm soát.
 
 ---
+
+### Câu A4 — Truthy & Falsy
+
+#### 1. Danh sách 8 giá trị Falsy trong JavaScript:
+Mọi giá trị trong JavaScript khi đưa vào điều kiện logic đều là **Truthy**, ngoại trừ chính xác 8 giá trị **Falsy** sau:
+1. `false`
+2. `0` (Số không)
+3. `-0` (Số không âm)
+4. `0n` (Kiểu BigInt không)
+5. `""` hoặc `''` (Chuỗi rỗng)
+6. `null`
+7. `undefined`
+8. `NaN`
+
+#### 2. Kết quả in ra màn hình (Chỉ những mệnh đề Truthy mới được kích hoạt)
+* `if ("0")` $\rightarrow$ **In chữ A** (Chuỗi ký tự không rỗng là Truthy)
+* `if ("")` $\rightarrow$ *Không in* (Chuỗi hoàn toàn rỗng là Falsy)
+* `if ([])` $\rightarrow$ **In chữ C** (Mảng rỗng bản chất là một Object, luôn luôn là Truthy)
+* `if ({})` $\rightarrow$ **In chữ D** (Đối tượng rỗng là Truthy)
+* `if (null)` $\rightarrow$ *Không in* (Falsy)
+* `if (0)` $\rightarrow$ *Không in* (Falsy)
+* `if (-1)` $\rightarrow$ **In chữ G** (Mọi số thực khác 0 đều mang giá trị Truthy)
+* `if (" ")` $\rightarrow$ **In chữ H** (Chuỗi chứa ký tự khoảng trắng không phải chuỗi rỗng $\rightarrow$ Truthy)
+
+---
