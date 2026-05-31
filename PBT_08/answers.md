@@ -59,3 +59,35 @@ const funcArrow = () => "Hey";
 * **`let`:** Có scope theo block (block scope). Mỗi vòng lặp sẽ tạo ra một môi trường từ vựng (lexical environment) hoàn toàn mới, giữ lại giá trị riêng biệt của `j` cho từng vòng lặp. Khi callback của `setTimeout` chạy, nó truy cập đúng giá trị `j` đã được "chốt" tại vòng lặp đó.
 
 ---
+
+## Câu A3 (5đ) — Array Methods
+
+```javascript
+const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+// 1. Lấy các số chẵn 
+const evens = nums.filter(n => n % 2 === 0);
+
+// 2. Nhân mỗi số với 3 
+const multiplied = nums.map(n => n * 3);
+
+// 3. Tính tổng tất cả 
+const sum = nums.reduce((acc, curr) => acc + curr, 0);
+
+// 4. Tìm số đầu tiên > 7 
+const firstGreaterThan7 = nums.find(n => n > 7);
+
+// 5. Kiểm tra CÓ số > 10 không 
+const hasGreaterThan10 = nums.some(n => n > 10);
+
+// 6. Kiểm tra TẤT CẢ đều > 0 
+const allGreaterThan0 = nums.every(n => n > 0);
+
+// 7. Tạo mảng "Số X là [chẵn/lẻ]"
+const strArray = nums.map(n => `Số ${n} là ${n % 2 === 0 ? 'chẵn' : 'lẻ'}`);
+
+// 8. Đảo ngược mảng (không mutate gốc)
+const reversed = [...nums].reverse(); // Hoặc nums.toReversed() trên các môi trường mới
+```
+
+---
