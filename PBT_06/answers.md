@@ -56,3 +56,25 @@ Việc override CSS thuần thiếu tính đồng bộ. Biến `$primary` trong 
 Nếu override CSS, bạn phải tự viết lại toàn bộ các class này. Khi dùng SASS variables, trình biên dịch sẽ tự động tính toán, tạo màu hover/active và cập nhật đồng loạt cho tất cả các components liên quan.
 
 ---
+
+## Câu C2 (10đ) — So sánh Bootstrap vs CSS thuần
+
+### 1. Bảng so sánh
+
+| Tiêu chí | Viết bằng CSS Thuần | Sử dụng Bootstrap |
+| :--- | :--- | :--- |
+| **Số dòng CSS cần viết** | Rất nhiều (Cần setup Flexbox/Grid, hover states, Media Queries). | Gần như bằng 0 (Chỉ cần sử dụng class có sẵn trên HTML). |
+| **Thời gian phát triển** | Chậm hơn. Phải tự thiết kế cấu trúc và test responsive. | Nhanh chóng. Tận dụng các component lắp ghép sẵn. |
+| **Khả năng tùy biến** | Vô hạn (100%). Kiểm soát từng pixel. | Trung bình. Cần cấu hình SCSS hoặc ghi đè nếu muốn thay đổi diện mạo mặc định. |
+
+### 2. Khi nào NÊN và KHÔNG NÊN dùng Bootstrap?
+
+**NÊN DÙNG:**
+* Xây dựng nhanh các MVP, prototype, landing page cơ bản.
+* Làm trang quản trị (Admin Dashboard), công cụ nội bộ không yêu cầu UI/UX quá đặc thù.
+* Làm việc nhóm cần một tiêu chuẩn layout thống nhất, dễ đọc.
+
+**KHÔNG NÊN DÙNG:**
+* Dự án yêu cầu thiết kế UI/UX độc bản, phá cách nghệ thuật (Creative portfolio).
+* Dự án có yêu cầu khắt khe về hiệu năng tải trang, không muốn tải framework dư thừa mã nguồn.
+* Khi bản thiết kế khác hoàn toàn Bootstrap, dẫn đến việc phải ghi đè CSS quá nhiều (lúc này dùng CSS thuần hoặc Tailwind sẽ tối ưu hơn).
