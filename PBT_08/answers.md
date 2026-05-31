@@ -91,3 +91,33 @@ const reversed = [...nums].reverse(); // Hoặc nums.toReversed() trên các mô
 ```
 
 ---
+
+## Câu A4 (5đ) — Object Destructuring & Spread
+
+**Dự đoán output:**
+```javascript
+console.log(name, price, ram, color);  
+// "iPhone 16" 25990000 8 "Titan"
+
+console.log(specs);                     
+// LỖI: ReferenceError: specs is not defined
+// (Vì specs đã được destructure sâu vào trong để lấy ram và color, bản thân biến specs không được tạo ra).
+
+console.log(updated.price);            
+// 23990000 (Ghi đè giá trị cũ)
+
+console.log(updated.sale);             
+// true
+
+console.log(product.price);            
+// 25990000 (Object gốc không bị ảnh hưởng bởi spread bậc 1)
+
+console.log(product.specs.ram);        
+// 16 
+```
+
+**Giải thích (Spread gotcha):**
+Spread operator (`{ ...product }`) chỉ tạo ra **"Shallow Copy"** (sao chép nông). 
+Các property kiểu nguyên thủy (như `name`, `price`) được copy giá trị. Nhưng các object con (như `specs`) thì chỉ được copy tham chiếu (reference) vùng nhớ. Do đó, `copy` và `product` vẫn trỏ chung vào cùng một object `specs`. Khi thay đổi `copy.specs.ram`, giá trị bên trong object gốc cũng bị thay đổi theo.
+
+---
