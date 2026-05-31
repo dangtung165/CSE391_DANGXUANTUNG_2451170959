@@ -35,3 +35,24 @@
 * **`.container-md`**: Chiếm 100% chiều rộng cho đến khi đạt breakpoint `md` (768px). Từ `md` trở lên, nó hoạt động giống hệt `.container` (có chiều rộng tối đa cố định).
 
 ---
+
+# PHẦN C — PHÂN TÍCH (20 điểm)
+
+## Câu C1 (10đ) — Tùy biến Bootstrap
+
+### 1. Quy trình đổi màu `$primary` từ xanh mặc định sang `#E63946`
+* **Công cụ cần thiết:** Môi trường Node.js (npm), mã nguồn SCSS của Bootstrap và trình biên dịch SASS.
+* **Quy trình modify:**
+  1. Tạo file SASS tùy chỉnh (VD: `custom.scss`).
+  2. Ghi đè biến màu **trước** khi import Bootstrap:
+     ```scss
+     $primary: #E63946;
+     @import "node_modules/bootstrap/scss/bootstrap";
+     ```
+  3. Biên dịch file `custom.scss` thành `style.css` và liên kết vào HTML.
+
+### 2. Tại sao KHÔNG nên override trực tiếp (`.btn-primary { background: red; }`)?
+Việc override CSS thuần thiếu tính đồng bộ. Biến `$primary` trong Bootstrap được sử dụng bởi hệ sinh thái hàng chục class khác nhau (như `text-primary`, `bg-primary`, `border-primary`, `btn-outline-primary`, `alert-primary`...). 
+Nếu override CSS, bạn phải tự viết lại toàn bộ các class này. Khi dùng SASS variables, trình biên dịch sẽ tự động tính toán, tạo màu hover/active và cập nhật đồng loạt cho tất cả các components liên quan.
+
+---
