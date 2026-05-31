@@ -42,3 +42,24 @@
 * **Toán tử trừ (`-`):** Chỉ phục vụ duy nhất một mục đích toán học. JavaScript buộc phải chuyển đổi chuỗi `"5"` về dạng số nguyên `5` trước khi thực hiện phép tính. Kết quả: `5 - 3` $\rightarrow$ `2`.
 
 ---
+
+### Câu A3 — So sánh == vs ===
+
+#### 1. Dự đoán True / False
+* `console.log(5 == "5");` $\rightarrow$ `true`
+* `console.log(5 === "5");` $\rightarrow$ `false`
+* `console.log(null == undefined);` $\rightarrow$ `true`
+* `console.log(null === undefined);` $\rightarrow$ `false`
+* `console.log(NaN == NaN);` $\rightarrow$ `false` *(Giá trị NaN đặc biệt không bao giờ bằng chính nó)*
+* `console.log(0 == false);` $\rightarrow$ `true`
+* `console.log(0 === false);` $\rightarrow$ `false`
+* `console.log("" == false);` $\rightarrow$ `true`
+
+#### 2. Quy tắc áp dụng thực tế
+Luôn luôn ưu tiên tuyệt đối việc sử dụng toán tử so sánh nghiêm ngặt **`===`**.
+
+**Tại sao?**
+* Toán tử `==` (Loose Equality) tự động thực hiện ép kiểu ngầm định phức tạp trước khi đối chiếu, dễ dẫn đến những kết quả không logic gây lỗi hệ thống ngầm (ví dụ: `"" == false` ra `true`).
+* Toán tử `===` (Strict Equality) yêu cầu nghiêm ngặt cả về **Giá trị** lẫn **Kiểu dữ liệu**. Nếu hai vế không đồng nhất kiểu dữ liệu, hệ thống lập tức trả về `false`, giúp mã nguồn minh bạch, an toàn và dễ kiểm soát.
+
+---
