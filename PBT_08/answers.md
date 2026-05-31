@@ -39,3 +39,23 @@ const funcArrow = () => "Hey";
 ```
 
 ---
+
+## Câu A2 (5đ) — Scope & Closure
+
+**Dự đoán Output:**
+* **Đoạn 1:**
+    * `console.log(c.increment());` → **1**
+    * `console.log(c.increment());` → **2**
+    * `console.log(c.increment());` → **3**
+    * `console.log(c.decrement());` → **2**
+    * `console.log(c.getCount());`  → **2**
+
+* **Đoạn 2 (Output sau 200ms):**
+    * `var: 3`, `var: 3`, `var: 3`
+    * `let: 0`, `let: 1`, `let: 2`
+
+**Giải thích chi tiết (var vs let trong setTimeout):**
+* **`var`:** Có scope theo hàm (function scope) hoặc global. Khi vòng lặp chạy xong, biến `i` duy nhất đó đã tăng lên `3`. Lúc `setTimeout` thực thi callback sau 100ms, nó nhìn vào cùng một biến `i` duy nhất trong bộ nhớ, nên in ra toàn số 3.
+* **`let`:** Có scope theo block (block scope). Mỗi vòng lặp sẽ tạo ra một môi trường từ vựng (lexical environment) hoàn toàn mới, giữ lại giá trị riêng biệt của `j` cho từng vòng lặp. Khi callback của `setTimeout` chạy, nó truy cập đúng giá trị `j` đã được "chốt" tại vòng lặp đó.
+
+---
