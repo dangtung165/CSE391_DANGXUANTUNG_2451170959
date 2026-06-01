@@ -1,0 +1,15 @@
+body { font-family: Arial, sans-serif; background: #f5f5f5; display: flex; justify-content: center; padding-top: 40px; }
+#app { background: white; width: 400px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; padding: 20px; }
+form { display: flex; gap: 10px; margin-bottom: 20px; }
+input { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+button { padding: 8px 12px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 4px; }
+ul { list-style: none; padding: 0; margin: 0; }
+li { display: flex; align-items: center; justify-content: space-between; padding: 10px; border-bottom: 1px solid #eee; }
+li.completed span { text-decoration: line-through; color: #bbb; }
+li .edit-input { display: none; flex: 1; padding: 4px; border: 1px solid #007bff; }
+li.editing span { display: none; }
+li.editing .edit-input { display: block; }
+footer { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; font-size: 14px; color: #666; }
+.filters button { background: none; color: #666; border: 1px solid transparent; }
+.filters button.active { border-color: #007bff; color: #007bff; border-radius: 4px; }
+.destroy { background: none; color: red; font-size: 16px; }
