@@ -1,0 +1,11 @@
+body { font-family: Arial, sans-serif; display: flex; justify-content: center; background: #eee; padding-top: 20px;}
+form { background: white; padding: 25px; border-radius: 8px; width: 350px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.form-control { margin-bottom: 15px; position: relative; }
+label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px; }
+input { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+.error-msg { color: red; font-size: 12px; display: block; margin-top: 4px; }
+.status { position: absolute; right: 10px; top: 32px; }
+.progress-bar { width: 100%; height: 6px; background: #ddd; margin-top: 5px; border-radius: 3px; overflow: hidden; }
+#strengthMeter { height: 100%; width: 0; transition: all 0.3s; }
+button { width: 100%; padding: 10px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; }
+button:disabled { background: #cccccc; cursor: not-allowed; }
