@@ -178,3 +178,35 @@ window.addEventListener("load", () => {
 ```
 
 ---
+
+### Câu C2 (7đ) — Hiệu năng (Performance)
+
+#### 1. Tại sao bind event lên 1000 elements riêng lẻ là BAD PRACTICE?
+* **Lãng phí bộ nhớ (Memory Consumption)**: Mỗi lần đăng ký `.addEventListener()`, một vùng nhớ trong RAM sẽ được cấp phát để lưu trữ hàm callback xử lý. Việc tạo 1000 bộ lắng nghe độc lập sẽ tiêu tốn dung lượng bộ nhớ lớn không cần thiết, làm tăng áp lực lên trình dọn rác (Garbage Collector) và gây giật lag ứng dụng.
+* **Hạn chế với phần tử động**: Khi có thêm phần tử mới được tạo ra bằng JS hoặc API, ta lại phải viết thêm code để gắn sự kiện cho chúng, dẫn đến trùng lặp mã nguồn và dễ bỏ sót gây rò rỉ bộ nhớ.
+
+#### Giải pháp từ Event Delegation:
+Cơ chế này tận dụng tính chất **Event Bubbling (Sự nổi bọt sự kiện)**. Thay vì lắng nghe trực tiếp tại 1000 thẻ con, ta chỉ gắn **1 bộ lắng nghe duy nhất** lên thẻ cha bao bọc tất cả. Khi bất kỳ thẻ con nào được click, sự kiện tự động lan truyền ngược lên thẻ cha. Tại đây, ta kiểm tra thuộc tính `e.target` để xác định chính xác thẻ con nào vừa bị tác động và thực thi logic xử lý một cách tập trung, gọn nhẹ.
+
+#### 2. Đoạn mã tối ưu bằng `DocumentFragment`
+
+```javascript
+// Tạo một vùng đệm ảo nằm ẩn hoàn toàn trong bộ nhớ
+const fragment = document.createDocumentFragment();
+
+for (let i = 0; i < 1000; i++) {
+    const div = document.createElement("div");
+    div.textContent = `Item ${i}`;
+    
+    // Đuv thẻ mới vào Fragment, hành động này không gây ảnh hưởng gì tới giao diện thực tế
+    fragment.appendChild(div);   
+}
+
+// Bơm toàn bộ 1000 thẻ từ vùng đệm vào DOM thật một lần duy nhất
+document.body.appendChild(fragment);
+```
+
+#### Giải thích tại sao nhanh hơn:
+* **Cách làm cũ**: Việc gọi `document.body.appendChild(div)` 1000 lần trực tiếp vào cây DOM thật sẽ ép trình duyệt phải liên tục tính toán lại kích thước, vị trí hình học của toàn bộ trang web (**Reflow**) và vẽ lại màu sắc giao diện (**Repaint**) liên tiếp 1000 lần. Quá trình lặp lại này cực kỳ tốn tài nguyên phần cứng.
+* **Cách dùng DocumentFragment**: Bản chất `DocumentFragment` là một cây DOM ảo gọn nhẹ nằm trong RAM, tách biệt hoàn toàn với giao diện người dùng hiển thị. Khi thêm 1000 thẻ con vào Fragment, trình duyệt không hề kích hoạt quy trình Reflow nào. Hành động cuối cùng chèn cả khối Fragment vào `body` chỉ bắt trình duyệt tính toán lại Layout **đúng 1 lần duy nhất**, giúp tối ưu hóa tốc độ kết xuất (rendering) lên gấp nhiều lần.
+```
