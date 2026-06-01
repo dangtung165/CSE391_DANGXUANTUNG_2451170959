@@ -80,3 +80,18 @@ document.querySelector("#result").textContent = userInput;
 ```
 
 ---
+
+### Câu A3 (5đ) — Event Bubbling
+
+* **Khi chưa bỏ comment (Mặc định):** Sự kiện click từ button sẽ nổi bọt (bubbling) lần lượt từ phần tử đích qua các thẻ cha bọc ngoài nó.
+  ```text
+  BUTTON
+  INNER
+  OUTER
+  ```
+* **Khi uncomment `e.stopPropagation()`:** Hàm này chặn đứng sự lan truyền (nổi bọt) của sự kiện lên các lớp cha phía trên cây DOM.
+  ```text
+  BUTTON
+  ```
+
+---
