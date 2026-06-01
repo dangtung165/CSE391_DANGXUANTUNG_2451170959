@@ -95,3 +95,86 @@ document.querySelector("#result").textContent = userInput;
   ```
 
 ---
+
+## PHẦN C — DEBUG & PHÂN TÍCH (15 điểm)
+
+### Câu C1 (8đ) — Debug DOM Code
+
+#### 1. Các lỗi nghiêm trọng đã được tìm thấy và sửa đổi
+1. **Lỗi cú pháp đăng ký sự kiện**: `addEventListener("onclick", ...)` -> Phải đổi thành `'click'` (loại bỏ chữ `on` phía trước).
+2. **Lỗi ghi đè biến DOM**: `countDisplay = count;` -> Gán trực tiếp giá trị số vào biến element làm hỏng tham chiếu DOM ban đầu của `countDisplay`. Phải sửa thành `countDisplay.textContent = count;`.
+3. **Lỗi không thực thi hàm**: `item.remove;` -> Thiếu dấu đóng mở ngoặc để kích hoạt method, khiến các phần tử lịch sử không bị xóa khi click nút clear. Sửa thành `item.remove();`.
+4. **Lỗi kiểu dữ liệu LocalStorage**: `count = localStorage.getItem("count")` -> Dữ liệu lấy từ kho lưu trữ luôn có kiểu chuỗi (string). Khi thực hiện phép toán `count++` ở các bước sau sẽ dẫn đến sai lệch tính toán logic. Cần ép kiểu về số nguyên bằng `parseInt()`.
+5. **Lỗi logic khôi phục dữ liệu**: Khi tải trang (`window.load`), code cũ chỉ nạp lại biến số `count` mà hoàn toàn bỏ quên việc khôi phục mã HTML của `historyList` từ `localStorage`, dẫn đến mất lịch sử hiển thị trên giao diện sau khi refresh.
+6. **Lỗi rò rỉ bộ nhớ (Memory Leak)**: Việc tạo sự kiện lắng nghe riêng lẻ trực tiếp trên từng thẻ `li` qua `createElement` cực kỳ tốn tài nguyên RAM khi số lượng thao tác tăng cao. Đã tối ưu bằng giải pháp **Event Delegation** trên thẻ cha `#history`.
+7. **Lỗi gán giá trị rỗng cho DOM**: `historyList.innerHTML = null;` -> Chuẩn nhất đối với dọn dẹp nội dung DOM nên dùng chuỗi rỗng `""`.
+
+#### 2. Đoạn mã hoàn chỉnh sau khi Refactor
+
+```javascript
+const countDisplay = document.querySelector(".count");
+const historyList = document.getElementById("history");
+let count = 0;
+
+// Hàm cập nhật giao diện hiển thị số đếm
+function updateDisplay() {
+    countDisplay.textContent = count;
+}
+
+// 1. Increment
+document.querySelector("#incrementBtn").addEventListener("click", function() {
+    count++;
+    updateDisplay();
+    
+    const li = document.createElement("li");
+    li.textContent = "Count changed to " + count;
+    historyList.append(li);
+});
+
+// 2. Decrement - Sửa "onclick" thành "click"
+document.querySelector("#decrementBtn").addEventListener("click", function() {
+    count--;
+    updateDisplay();
+});
+
+// 3. Reset - Sửa lỗi phá vỡ biến countDisplay và đổi null thành ""
+document.querySelector("#resetBtn").addEventListener("click", () => {
+    count = 0;
+    updateDisplay();
+    historyList.innerHTML = "";
+});
+
+// 4. Xóa từng item - Tối ưu bằng Event Delegation trên thẻ cha thay vì bind lẻ tẻ
+historyList.addEventListener("click", function(e) {
+    if(e.target.tagName === "LI") {
+        e.target.remove();
+    }
+});
+
+// 5. Clear tất cả history - Sửa lỗi thực thi hàm thành item.remove()
+document.querySelector("#clearHistory").addEventListener("click", () => {
+    const items = historyList.querySelectorAll("li");
+    items.forEach(item => {
+        item.remove(); 
+    });
+});
+
+// 6. Lưu dữ liệu vào LocalStorage trước khi đóng trang
+window.addEventListener("beforeunload", () => {
+    localStorage.setItem("count", count);
+    localStorage.setItem("history", historyList.innerHTML);
+});
+
+// 7. Khôi phục dữ liệu khi tải lại trang - Ép kiểu số và render lại danh sách lịch sử cũ
+window.addEventListener("load", () => {
+    count = parseInt(localStorage.getItem("count"), 10) || 0;
+    updateDisplay();
+    
+    const savedHistory = localStorage.getItem("history");
+    if(savedHistory) {
+        historyList.innerHTML = savedHistory;
+    }
+});
+```
+
+---
