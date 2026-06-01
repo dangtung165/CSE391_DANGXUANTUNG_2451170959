@@ -56,3 +56,27 @@ div#app
   ```
 
 ---
+
+### Câu A2 (5đ) — innerHTML vs textContent
+
+#### 1. Sự khác nhau & Trường hợp sử dụng
+* **`innerHTML`**: Trả về hoặc thiết lập toàn bộ cú pháp HTML bên trong một phần tử. Trình duyệt sẽ phân tích (parse) chuỗi truyền vào thành các thẻ DOM thực sự và render lên màn hình.
+    * *Khi nào dùng*: Khi cần chủ động chèn hoặc thay thế một cấu trúc HTML phức tạp (đã được kiểm soát dữ liệu đầu vào hoàn toàn an toàn).
+* **`textContent`**: Chỉ trả về hoặc thiết lập nội dung văn bản thuần túy (plain text) bên trong phần tử. Mọi ký tự đặc biệt của HTML (như `<`, `>`) sẽ được tự động mã hóa (escape) thành text an toàn, không thể chạy như code.
+    * *Khi nào dùng*: Khi cập nhật nội dung chữ thông thường (tiêu đề, nhãn nút, hiển thị số lượng) hoặc hiển thị bất kỳ dữ liệu thô nào do người dùng nhập vào.
+
+#### 2. Câu hỏi bảo mật (XSS)
+`innerHTML` gây ra lỗ hổng **XSS (Cross-Site Scripting)** vì nó chấp nhận và cho phép trình duyệt thực thi các đoạn mã kịch bản (script) nằm trong chuỗi ký tự được truyền vào. 
+
+Trong ví dụ đề bài, khi kẻ tấn công cố tình nhập thẻ `<img>` kèm lỗi tải ảnh cố ý (`src=x`), trình duyệt parse đoạn này thành mã HTML thật, ngay lập tức kích hoạt sự kiện `onerror` và chạy hàm `alert('Hacked!')`. Kẻ xấu có thể lợi dụng điều này để chạy các đoạn script nguy hiểm nhằm đánh cắp token, session hoặc cookie của người dùng.
+
+#### Cách khắc phục:
+Thay thế hoàn toàn `innerHTML` bằng `textContent` để triệt tiêu khả năng biên dịch cấu trúc HTML từ dữ liệu đầu vào:
+
+```javascript
+const userInput = document.querySelector("#search").value;
+// Sửa đổi: textContent biến thẻ <img> thành văn bản thuần túy không gây hại
+document.querySelector("#result").textContent = userInput; 
+```
+
+---
