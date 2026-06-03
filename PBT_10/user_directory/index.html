@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Directory (CRUD)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Danh Sách Người Dùng</h1>
+            <div class="action-bar">
+                <input type="text" id="search-input" placeholder="Tìm theo tên hoặc email...">
+                <button id="open-add-modal-btn" class="btn btn-primary">+ Thêm mới</button>
+            </div>
+        </header>
+
+        <main id="user-grid" class="user-grid"></main>
+    </div>
+
+    <div id="user-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="modal-title">Thêm người dùng mới</h2>
+            <form id="user-form">
+                <input type="hidden" id="user-id">
+                <div class="form-group">
+                    <label for="user-name">Họ và tên</label>
+                    <input type="text" id="user-name" required placeholder="Nguyễn Văn A">
+                </div>
+                <div class="form-group">
+                    <label for="user-email">Email</label>
+                    <input type="email" id="user-email" required placeholder="example@gmail.com">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" id="close-modal-btn" class="btn btn-secondary">Hủy</button>
+                    <button type="submit" id="save-btn" class="btn btn-primary">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
