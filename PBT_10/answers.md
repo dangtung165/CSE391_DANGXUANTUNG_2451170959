@@ -174,3 +174,74 @@ async function fetchWithRetry(url, maxRetries = 3) {
 ```
 
 ---
+
+### Câu C2 (10đ) — Promise.all vs Promise.allSettled vs Promise.race
+
+#### 1. Bảng so sánh
+
+| Method | Khi nào resolve? | Khi nào reject? | Use case |
+| :--- | :--- | :--- | :--- |
+| **`.all()`** | Khi **tất cả** Promises thành công. | Khi **1** Promise bất kỳ thất bại (Reject ngay lập tức). | Tải trang giỏ hàng cần gọi cả API user và API items. Thiếu 1 trong 2 là báo lỗi cả trang. |
+| **`.allSettled()`**| Khi **tất cả** Promises hoàn thành (dù pass/fail).| **Không bao giờ** reject. | Dashboard gọi 5 API độc lập. 1 API lỗi thì widget đó hiện error, 4 widget kia vẫn hiển thị bình thường. |
+| **`.race()`** | Khi **1** Promise bất kỳ chạy xong đầu tiên. | Khi Promise xong đầu tiên bị lỗi. | Giới hạn thời gian (Timeout request) hoặc đua tốc độ ping 2 server CDN xem server nào trả về nhanh hơn. |
+| **`.any()`** | Khi **1** Promise **thành công đầu tiên**. | Khi **tất cả** Promises đều thất bại. | Cơ chế Fallback: Gọi cổng thanh toán A, nếu lỗi tự nhảy qua gọi cổng B. Cổng nào thành công trước lấy cổng đó. |
+
+#### 2. Ví dụ Code thực tế
+
+```javascript
+// --- 1. Promise.all() ---
+// Use case: Bắt buộc lấy đủ thông tin mới render được page.
+async function loadCheckoutPage(userId) {
+    try {
+        const [user, cart] = await Promise.all([
+            fetch(`/api/user/${userId}`).then(r => r.json()),
+            fetch(`/api/cart/${userId}`).then(r => r.json())
+        ]);
+        console.log("Render Checkout:", user, cart);
+    } catch (err) {
+        console.error("Lỗi: Không thể hiển thị trang thanh toán", err);
+    }
+}
+
+// --- 2. Promise.allSettled() ---
+// Use case: Gửi email marketing cho nhiều user, lỗi một người không ảnh hưởng người khác.
+async function sendMassEmails(emails) {
+    const promises = emails.map(email => 
+        fetch('/api/send', { method: 'POST', body: JSON.stringify({ email }) })
+    );
+    
+    const results = await Promise.allSettled(promises);
+    
+    const success = results.filter(r => r.status === 'fulfilled').length;
+    const failed = results.filter(r => r.status === 'rejected').length;
+    console.log(`Đã gửi: ${success} thành công, ${failed} thất bại.`);
+}
+
+// --- 3. Promise.race() ---
+// Use case: Tranh đua tốc độ. Lấy dữ liệu từ CDN nào phản hồi nhanh nhất.
+async function getFastestImage() {
+    try {
+        const fastestImg = await Promise.race([
+            fetch('[https://cdn-asia.example.com/image.jpg](https://cdn-asia.example.com/image.jpg)').then(r => r.blob()),
+            fetch('[https://cdn-us.example.com/image.jpg](https://cdn-us.example.com/image.jpg)').then(r => r.blob())
+        ]);
+        console.log("Đã tải xong ảnh từ server nhanh nhất!");
+    } catch (err) {
+        console.error("Server phản hồi đầu tiên bị lỗi mạng.");
+    }
+}
+
+// --- 4. Promise.any() ---
+// Use case: Cổng thanh toán dự phòng. Chỉ cần 1 cổng thành công là được.
+async function processPayment(order) {
+    try {
+        const result = await Promise.any([
+            fetch('/api/payment-momo', { method: 'POST', body: order }), // Cổng 1
+            fetch('/api/payment-vnpay', { method: 'POST', body: order }) // Cổng 2
+        ]);
+        console.log("Thanh toán thành công qua 1 trong các cổng:", result);
+    } catch (err) {
+        console.error("Tất cả các cổng thanh toán đều đang bị lỗi hệ thống!", err.errors);
+    }
+}
+```
