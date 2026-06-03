@@ -109,3 +109,68 @@ async function handleData() {
 ```
 
 ---
+
+## PHẦN C — PHÂN TÍCH (20 điểm)
+
+### Câu C1 (10đ) — Error Handling Strategy
+
+**Chiến lược thiết kế xử lý lỗi:**
+1. **Network errors (Mất mạng):** Dùng `catch` bắt lỗi, hiện thông báo cho user "Mất kết nối", đồng thời dùng hàm Retry (thử lại) vài lần trước khi bỏ cuộc.
+2. **API errors:** Phân tích `response.status`:
+   * `404`: Báo "Dữ liệu không tồn tại".
+   * `429 (Too Many Requests)`: Báo user chờ hoặc tự động ngưng gọi API một khoảng thời gian (Backoff) rồi thử lại.
+   * `500`: Báo "Lỗi server, vui lòng quay lại sau".
+3. **Timeout:** Gắn `AbortController` vào request. Nếu quá thời gian (VD: 10s) mà server chưa phản hồi thì tự động ngắt kết nối để giải phóng tài nguyên.
+
+**Viết code:**
+
+```javascript
+// 1. fetchWithTimeout - Xử lý API chậm > 10s
+async function fetchWithTimeout(url, ms = 10000) {
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), ms);
+
+    try {
+        const response = await fetch(url, { signal: controller.signal });
+        clearTimeout(id);
+        return response;
+    } catch (error) {
+        clearTimeout(id);
+        if (error.name === 'AbortError') {
+            throw new Error(`Timeout: API không phản hồi sau ${ms}ms`);
+        }
+        throw error;
+    }
+}
+
+// 2. fetchWithRetry - Xử lý Retry 3 lần & Rate Limit 429
+async function fetchWithRetry(url, maxRetries = 3) {
+    let delay = 1000; // Khởi tạo chờ 1s
+    
+    for (let i = 0; i < maxRetries; i++) {
+        try {
+            const response = await fetchWithTimeout(url, 10000);
+            
+            // Nếu dính 429, chủ động chờ lâu hơn rồi retry
+            if (response.status === 429) {
+                console.warn(`Lỗi 429. Đang chờ ${delay}ms để thử lại...`);
+                await new Promise(res => setTimeout(res, delay));
+                delay *= 2; // Tăng gấp đôi thời gian chờ cho lần sau
+                continue;
+            }
+
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            return await response.json();
+            
+        } catch (error) {
+            if (i === maxRetries - 1) {
+                throw new Error(`Thất bại sau ${maxRetries} lần thử: ${error.message}`);
+            }
+            console.log(`Lỗi mạng. Thử lại lần ${i + 1}...`);
+            await new Promise(res => setTimeout(res, delay));
+        }
+    }
+}
+```
+
+---
