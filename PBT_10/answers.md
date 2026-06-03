@@ -57,3 +57,55 @@ async function getData() {
   * **JSON parse error:** Có catch. Nếu server trả về HTML thay vì JSON, `.json()` sẽ lỗi và rơi vào catch.
 
 ---
+
+### Câu A3 (5đ) — Promise States
+
+#### 1. Sơ đồ 3 trạng thái của Promise
+```text
+               +-------------------+
+               |      PENDING      |
+               +---------+---------+
+                         |
+        +----------------+----------------+
+        |                                 |
+  resolve()                         reject()
+        |                                 |
+        v                                 v
++---------------+                 +---------------+
+|   FULFILLED   |                 |   REJECTED    |
+| (Thành công)  |                 |  (Thất bại)   |
++---------------+                 +---------------+
+```
+
+#### 2. Callback Hell & Refactor
+* **Callback Hell là gì?** Là tình trạng lồng ghép quá nhiều hàm callback vào nhau để xử lý các tác vụ bất đồng bộ liên tiếp, khiến code phình to theo hình kim tự tháp ngang, cực kỳ khó đọc và bảo trì.
+
+**Ví dụ 4 cấp callback hell:**
+```javascript
+getUser(1, (user) => {
+    getPosts(user.id, (posts) => {
+        getComments(posts[0].id, (comments) => {
+            writeLog(comments[0].text, (status) => {
+                console.log("Done: " + status);
+            });
+        });
+    });
+});
+```
+
+**Refactor thành async/await:**
+```javascript
+async function handleData() {
+    try {
+        const user = await getUser(1);
+        const posts = await getPosts(user.id);
+        const comments = await getComments(posts[0].id);
+        const status = await writeLog(comments[0].text);
+        console.log("Done: " + status);
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+```
+
+---
