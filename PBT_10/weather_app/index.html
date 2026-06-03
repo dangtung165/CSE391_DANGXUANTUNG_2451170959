@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Dự Báo Thời Tiết</h1>
+        
+        <div class="search-box">
+            <input type="text" id="city-input" placeholder="Nhập tên thành phố (vd: Hanoi, London)...">
+            <button id="search-btn">Tìm</button>
+        </div>
+
+        <div class="history-section">
+            <h3>Lịch sử tìm kiếm:</h3>
+            <div id="history-list" class="history-list"></div>
+        </div>
+
+        <div class="weather-display">
+            <div id="state-loading" class="state hidden">
+                <div class="spinner"></div>
+                <p>Đang tải dữ liệu...</p>
+            </div>
+
+            <div id="state-success" class="state hidden">
+                <h2 id="weather-city">Thành phố</h2>
+                <div class="weather-info">
+                    <span id="weather-icon" class="weather-emoji">☀️</span>
+                    <span id="weather-temp" class="temp">--°C</span>
+                </div>
+                <p id="weather-desc" class="desc">Mô tả</p>
+                <p>Độ ẩm: <span id="weather-humidity">--</span>%</p>
+            </div>
+
+            <div id="state-error" class="state hidden">
+                <p class="error-message">❌ Có lỗi xảy ra: <span id="error-text">Không tìm thấy thành phố</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
